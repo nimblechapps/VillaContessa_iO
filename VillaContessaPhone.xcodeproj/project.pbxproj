@@ -1,0 +1,578 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		278F964CC83FD24D5464DFA3 /* Pods_VillaContessaPhone.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E8BB480E583DEEB9111591FB /* Pods_VillaContessaPhone.framework */; };
+		68138B481F76137600CAAFC4 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68138B471F76137600CAAFC4 /* Reachability.swift */; };
+		68164DB61F63BC6700063A5D /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68164DB51F63BC6700063A5D /* AdSupport.framework */; };
+		68187CCB1E8E36CE008E5BA6 /* ApplicationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68187CCA1E8E36CE008E5BA6 /* ApplicationData.swift */; };
+		68187CCD1E8E3723008E5BA6 /* AppConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68187CCC1E8E3723008E5BA6 /* AppConstant.swift */; };
+		68187CD41E8E77B8008E5BA6 /* disconnect.wav in Resources */ = {isa = PBXBuildFile; fileRef = 68187CD11E8E77B8008E5BA6 /* disconnect.wav */; };
+		68187CD51E8E77B8008E5BA6 /* incoming.wav in Resources */ = {isa = PBXBuildFile; fileRef = 68187CD21E8E77B8008E5BA6 /* incoming.wav */; };
+		68187CD61E8E77B8008E5BA6 /* outgoing.wav in Resources */ = {isa = PBXBuildFile; fileRef = 68187CD31E8E77B8008E5BA6 /* outgoing.wav */; };
+		683595811EBC41C50034E280 /* TwilioSyncClient.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6835957E1EBC41AF0034E280 /* TwilioSyncClient.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		683595831EBC42370034E280 /* SyncManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683595821EBC42370034E280 /* SyncManager.swift */; };
+		6849CB8E1E938A0100E79990 /* BasicAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6849CB8D1E938A0100E79990 /* BasicAlertController.swift */; };
+		684B62BE1F163554001A99C5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 684B62BA1F163554001A99C5 /* Main.storyboard */; };
+		684B62BF1F163554001A99C5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 684B62BC1F163554001A99C5 /* LaunchScreen.storyboard */; };
+		6852F71A1E9F94AC00CF9D40 /* TwilioVoice.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6852F7171E9F949200CF9D40 /* TwilioVoice.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		685DD0971F63ABE00007C098 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 685DD0961F63ABE00007C098 /* GoogleService-Info.plist */; };
+		686249F51E9205F000C10A49 /* DotsLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 686249F41E9205F000C10A49 /* DotsLoader.swift */; };
+		688264631EFD1DDA00E49986 /* Garamond Roman.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 688264621EFD1DDA00E49986 /* Garamond Roman.ttf */; };
+		688CF5011F0A22D300D39F6C /* Klingelton-altes-Telefon.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 688CF5001F0A22D300D39F6C /* Klingelton-altes-Telefon.mp3 */; };
+		68A7E3751E4ED63900F9D776 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 68A7E3741E4ED63900F9D776 /* Assets.xcassets */; };
+		68A7E3831E4ED68000F9D776 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68A7E3801E4ED68000F9D776 /* AppDelegate.swift */; };
+		68A7E3841E4ED68000F9D776 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68A7E3821E4ED68000F9D776 /* ViewController.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		68A7E38B1E4ED72F00F9D776 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				683595811EBC41C50034E280 /* TwilioSyncClient.framework in Embed Frameworks */,
+				6852F71A1E9F94AC00CF9D40 /* TwilioVoice.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		68138B471F76137600CAAFC4 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
+		68164DB51F63BC6700063A5D /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		68187CCA1E8E36CE008E5BA6 /* ApplicationData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationData.swift; sourceTree = "<group>"; };
+		68187CCC1E8E3723008E5BA6 /* AppConstant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppConstant.swift; sourceTree = "<group>"; };
+		68187CD11E8E77B8008E5BA6 /* disconnect.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = disconnect.wav; sourceTree = "<group>"; };
+		68187CD21E8E77B8008E5BA6 /* incoming.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = incoming.wav; sourceTree = "<group>"; };
+		68187CD31E8E77B8008E5BA6 /* outgoing.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = outgoing.wav; sourceTree = "<group>"; };
+		6835957E1EBC41AF0034E280 /* TwilioSyncClient.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TwilioSyncClient.framework; sourceTree = "<group>"; };
+		683595821EBC42370034E280 /* SyncManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SyncManager.swift; sourceTree = "<group>"; };
+		6849CB8D1E938A0100E79990 /* BasicAlertController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicAlertController.swift; sourceTree = "<group>"; };
+		684B62BB1F163554001A99C5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = VillaContessaPhone/Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		684B62BD1F163554001A99C5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = VillaContessaPhone/Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		6852F7171E9F949200CF9D40 /* TwilioVoice.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TwilioVoice.framework; sourceTree = "<group>"; };
+		685DD0961F63ABE00007C098 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		686249F41E9205F000C10A49 /* DotsLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DotsLoader.swift; sourceTree = "<group>"; };
+		688264621EFD1DDA00E49986 /* Garamond Roman.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Garamond Roman.ttf"; sourceTree = "<group>"; };
+		688CF5001F0A22D300D39F6C /* Klingelton-altes-Telefon.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Klingelton-altes-Telefon.mp3"; sourceTree = "<group>"; };
+		68A7E36A1E4ED63900F9D776 /* Villa Contessa Phone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Villa Contessa Phone.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		68A7E3741E4ED63900F9D776 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		68A7E3791E4ED63900F9D776 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		68A7E3801E4ED68000F9D776 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		68A7E3821E4ED68000F9D776 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		68B7BA331F2750CE007DD76F /* Villa Contessa Phone.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Villa Contessa Phone.entitlements"; sourceTree = "<group>"; };
+		C530F2290F523A6A7626A957 /* Pods-VillaContessaPhone.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VillaContessaPhone.release.xcconfig"; path = "Pods/Target Support Files/Pods-VillaContessaPhone/Pods-VillaContessaPhone.release.xcconfig"; sourceTree = "<group>"; };
+		E03EE2E6E3CC40B879469A69 /* Pods-VillaContessaPhone.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VillaContessaPhone.debug.xcconfig"; path = "Pods/Target Support Files/Pods-VillaContessaPhone/Pods-VillaContessaPhone.debug.xcconfig"; sourceTree = "<group>"; };
+		E8BB480E583DEEB9111591FB /* Pods_VillaContessaPhone.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VillaContessaPhone.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		68A7E3671E4ED63900F9D776 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				68164DB61F63BC6700063A5D /* AdSupport.framework in Frameworks */,
+				278F964CC83FD24D5464DFA3 /* Pods_VillaContessaPhone.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1AC5363505F4133A0E3D8038 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				E03EE2E6E3CC40B879469A69 /* Pods-VillaContessaPhone.debug.xcconfig */,
+				C530F2290F523A6A7626A957 /* Pods-VillaContessaPhone.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		29CE124DC05C7EDBF92BCBEF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				68164DB51F63BC6700063A5D /* AdSupport.framework */,
+				E8BB480E583DEEB9111591FB /* Pods_VillaContessaPhone.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		68187CC51E8E366C008E5BA6 /* AppConstant */ = {
+			isa = PBXGroup;
+			children = (
+				68187CCA1E8E36CE008E5BA6 /* ApplicationData.swift */,
+				68187CCC1E8E3723008E5BA6 /* AppConstant.swift */,
+				6849CB8D1E938A0100E79990 /* BasicAlertController.swift */,
+				683595821EBC42370034E280 /* SyncManager.swift */,
+			);
+			path = AppConstant;
+			sourceTree = "<group>";
+		};
+		68187CD01E8E77B8008E5BA6 /* Ringtones */ = {
+			isa = PBXGroup;
+			children = (
+				688CF5001F0A22D300D39F6C /* Klingelton-altes-Telefon.mp3 */,
+				68187CD11E8E77B8008E5BA6 /* disconnect.wav */,
+				68187CD21E8E77B8008E5BA6 /* incoming.wav */,
+				68187CD31E8E77B8008E5BA6 /* outgoing.wav */,
+			);
+			path = Ringtones;
+			sourceTree = "<group>";
+		};
+		686249F21E9205F000C10A49 /* Dependencies */ = {
+			isa = PBXGroup;
+			children = (
+				68138B471F76137600CAAFC4 /* Reachability.swift */,
+				686249F31E9205F000C10A49 /* DotsLoader */,
+			);
+			path = Dependencies;
+			sourceTree = "<group>";
+		};
+		686249F31E9205F000C10A49 /* DotsLoader */ = {
+			isa = PBXGroup;
+			children = (
+				686249F41E9205F000C10A49 /* DotsLoader.swift */,
+			);
+			path = DotsLoader;
+			sourceTree = "<group>";
+		};
+		6867F1661EF24DF1000A2429 /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				688264621EFD1DDA00E49986 /* Garamond Roman.ttf */,
+			);
+			path = Font;
+			sourceTree = "<group>";
+		};
+		68A7E3611E4ED63900F9D776 = {
+			isa = PBXGroup;
+			children = (
+				68A7E36C1E4ED63900F9D776 /* VillaContessaPhone */,
+				68A7E36B1E4ED63900F9D776 /* Products */,
+				1AC5363505F4133A0E3D8038 /* Pods */,
+				29CE124DC05C7EDBF92BCBEF /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		68A7E36B1E4ED63900F9D776 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				68A7E36A1E4ED63900F9D776 /* Villa Contessa Phone.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		68A7E36C1E4ED63900F9D776 /* VillaContessaPhone */ = {
+			isa = PBXGroup;
+			children = (
+				685DD0961F63ABE00007C098 /* GoogleService-Info.plist */,
+				68B7BA331F2750CE007DD76F /* Villa Contessa Phone.entitlements */,
+				6867F1661EF24DF1000A2429 /* Font */,
+				686249F21E9205F000C10A49 /* Dependencies */,
+				68187CC51E8E366C008E5BA6 /* AppConstant */,
+				68A7E37F1E4ED68000F9D776 /* AppDelegate */,
+				68A7E3811E4ED68000F9D776 /* Controller */,
+				68A7E3851E4ED68500F9D776 /* View */,
+				68187CD01E8E77B8008E5BA6 /* Ringtones */,
+				68A7E3861E4ED71F00F9D776 /* Framework */,
+				68A7E3741E4ED63900F9D776 /* Assets.xcassets */,
+				68A7E3791E4ED63900F9D776 /* Info.plist */,
+			);
+			path = VillaContessaPhone;
+			sourceTree = "<group>";
+		};
+		68A7E37F1E4ED68000F9D776 /* AppDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				68A7E3801E4ED68000F9D776 /* AppDelegate.swift */,
+			);
+			path = AppDelegate;
+			sourceTree = "<group>";
+		};
+		68A7E3811E4ED68000F9D776 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				68A7E3821E4ED68000F9D776 /* ViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		68A7E3851E4ED68500F9D776 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				684B62BA1F163554001A99C5 /* Main.storyboard */,
+				684B62BC1F163554001A99C5 /* LaunchScreen.storyboard */,
+			);
+			name = View;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		68A7E3861E4ED71F00F9D776 /* Framework */ = {
+			isa = PBXGroup;
+			children = (
+				6835957E1EBC41AF0034E280 /* TwilioSyncClient.framework */,
+				6852F7171E9F949200CF9D40 /* TwilioVoice.framework */,
+			);
+			path = Framework;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		68A7E3691E4ED63900F9D776 /* VillaContessaPhone */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 68A7E37C1E4ED63900F9D776 /* Build configuration list for PBXNativeTarget "VillaContessaPhone" */;
+			buildPhases = (
+				357ACA20F7EA79E63282BE6B /* [CP] Check Pods Manifest.lock */,
+				68A7E3661E4ED63900F9D776 /* Sources */,
+				68A7E3671E4ED63900F9D776 /* Frameworks */,
+				68A7E3681E4ED63900F9D776 /* Resources */,
+				68A7E38B1E4ED72F00F9D776 /* Embed Frameworks */,
+				96BF3E6F1554218F39E491FF /* [CP] Embed Pods Frameworks */,
+				C371627C2EE16DF3824BFBBA /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = VillaContessaPhone;
+			productName = TwilioVoiceCall;
+			productReference = 68A7E36A1E4ED63900F9D776 /* Villa Contessa Phone.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		68A7E3621E4ED63900F9D776 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0820;
+				LastUpgradeCheck = 0830;
+				ORGANIZATIONNAME = Nimblechapps;
+				TargetAttributes = {
+					68A7E3691E4ED63900F9D776 = {
+						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = 69239AZER7;
+						ProvisioningStyle = Manual;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
+					};
+				};
+			};
+			buildConfigurationList = 68A7E3651E4ED63900F9D776 /* Build configuration list for PBXProject "VillaContessaPhone" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 68A7E3611E4ED63900F9D776;
+			productRefGroup = 68A7E36B1E4ED63900F9D776 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				68A7E3691E4ED63900F9D776 /* VillaContessaPhone */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		68A7E3681E4ED63900F9D776 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				684B62BE1F163554001A99C5 /* Main.storyboard in Resources */,
+				684B62BF1F163554001A99C5 /* LaunchScreen.storyboard in Resources */,
+				685DD0971F63ABE00007C098 /* GoogleService-Info.plist in Resources */,
+				68187CD41E8E77B8008E5BA6 /* disconnect.wav in Resources */,
+				688CF5011F0A22D300D39F6C /* Klingelton-altes-Telefon.mp3 in Resources */,
+				68187CD61E8E77B8008E5BA6 /* outgoing.wav in Resources */,
+				688264631EFD1DDA00E49986 /* Garamond Roman.ttf in Resources */,
+				68187CD51E8E77B8008E5BA6 /* incoming.wav in Resources */,
+				68A7E3751E4ED63900F9D776 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		357ACA20F7EA79E63282BE6B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		96BF3E6F1554218F39E491FF /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-VillaContessaPhone/Pods-VillaContessaPhone-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C371627C2EE16DF3824BFBBA /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-VillaContessaPhone/Pods-VillaContessaPhone-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		68A7E3661E4ED63900F9D776 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				68A7E3841E4ED68000F9D776 /* ViewController.swift in Sources */,
+				6849CB8E1E938A0100E79990 /* BasicAlertController.swift in Sources */,
+				683595831EBC42370034E280 /* SyncManager.swift in Sources */,
+				68A7E3831E4ED68000F9D776 /* AppDelegate.swift in Sources */,
+				68187CCB1E8E36CE008E5BA6 /* ApplicationData.swift in Sources */,
+				68187CCD1E8E3723008E5BA6 /* AppConstant.swift in Sources */,
+				68138B481F76137600CAAFC4 /* Reachability.swift in Sources */,
+				686249F51E9205F000C10A49 /* DotsLoader.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		684B62BA1F163554001A99C5 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				684B62BB1F163554001A99C5 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		684B62BC1F163554001A99C5 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				684B62BD1F163554001A99C5 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		68A7E37A1E4ED63900F9D776 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "$(inherited)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		68A7E37B1E4ED63900F9D776 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "$(inherited)";
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		68A7E37D1E4ED63900F9D776 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E03EE2E6E3CC40B879469A69 /* Pods-VillaContessaPhone.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "VillaContessaPhone/Villa Contessa Phone.entitlements";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Nimble Chapps (69239AZER7)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				DEVELOPMENT_TEAM = 69239AZER7;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/VillaContessaPhone/Framework",
+					"$(PROJECT_DIR)/Analytics",
+					"$(PROJECT_DIR)/VillaContessaPhone/Framework/Analytics",
+				);
+				INFOPLIST_FILE = "$(SRCROOT)/VillaContessaPhone/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = "";
+				OTHER_LDFLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.nimblechapps.twiliocall;
+				PRODUCT_NAME = "Villa Contessa Phone";
+				PROVISIONING_PROFILE = "63db76c6-e1ae-4360-9e50-51e2e8b13c07";
+				PROVISIONING_PROFILE_SPECIFIER = TwilioCallAdhocPush;
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		68A7E37E1E4ED63900F9D776 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C530F2290F523A6A7626A957 /* Pods-VillaContessaPhone.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "VillaContessaPhone/Villa Contessa Phone.entitlements";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Nimble Chapps (69239AZER7)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				DEVELOPMENT_TEAM = 69239AZER7;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/VillaContessaPhone/Framework",
+					"$(PROJECT_DIR)/Analytics",
+					"$(PROJECT_DIR)/VillaContessaPhone/Framework/Analytics",
+				);
+				INFOPLIST_FILE = "$(SRCROOT)/VillaContessaPhone/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = "";
+				OTHER_LDFLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.nimblechapps.twiliocall;
+				PRODUCT_NAME = "Villa Contessa Phone";
+				PROVISIONING_PROFILE = "63db76c6-e1ae-4360-9e50-51e2e8b13c07";
+				PROVISIONING_PROFILE_SPECIFIER = TwilioCallAdhocPush;
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		68A7E3651E4ED63900F9D776 /* Build configuration list for PBXProject "VillaContessaPhone" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				68A7E37A1E4ED63900F9D776 /* Debug */,
+				68A7E37B1E4ED63900F9D776 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		68A7E37C1E4ED63900F9D776 /* Build configuration list for PBXNativeTarget "VillaContessaPhone" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				68A7E37D1E4ED63900F9D776 /* Debug */,
+				68A7E37E1E4ED63900F9D776 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 68A7E3621E4ED63900F9D776 /* Project object */;
+}

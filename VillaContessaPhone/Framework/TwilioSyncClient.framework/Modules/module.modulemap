@@ -1,0 +1,6 @@
+framework module TwilioSyncClient {
+  umbrella header "TwilioSyncClient.h"
+
+  export *
+  module * { export * }
+}
