@@ -5,6 +5,7 @@ framework module TwilioVoice {
   header "TVOCallInvite.h"
   header "TVOCall.h"
   header "TVOCallDelegate.h"
+  header "TVOError.h"
 
   export *
   module * { export * }

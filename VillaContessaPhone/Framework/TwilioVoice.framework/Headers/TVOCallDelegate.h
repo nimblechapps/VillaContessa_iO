@@ -18,7 +18,7 @@
  */
 
 /**
- * Notifies the delegate that a call has connected.
+ * @brief Notifies the delegate that a call has connected.
  *
  * @param call The `<TVOCall>` that was connected.
  *
@@ -27,22 +27,25 @@
 - (void)callDidConnect:(nonnull TVOCall *)call;
 
 /**
- * Notifies the delegate that a call has disconnected.
+ * @brief Notifies the delegate that a call has failed to connect.
  *
- * @param call The `<TVOCall>` that was disconnected.
+ * @param call The `<TVOCall>` that failed to connect.
+ * @param error The `<NSError>` that occurred.
  *
  * @see TVOCall
  */
-- (void)callDidDisconnect:(nonnull TVOCall *)call;
+- (void)call:(nonnull TVOCall *)call didFailToConnectWithError:(nonnull NSError *)error;
 
 /**
- * Notifies the delegate that a call has encountered an error.
+ * @brief Notifies the delegate that a call has disconnected.
  *
- * @param call The `<TVOCall>` that encountered the error.
- * @param error The `NSError` that occurred.
+ * @discussion If the disconnection was unexpected then a Non-null `NSError` will be present.
+ *
+ * @param call The `<TVOCall>` that was disconnected.
+ * @param error Indicates why the disconnect occurred.
  *
  * @see TVOCall
  */
-- (void)call:(nonnull TVOCall *)call didFailWithError:(nonnull NSError *)error;
+- (void)call:(nonnull TVOCall *)call didDisconnectWithError:(nullable NSError *)error;
 
 @end

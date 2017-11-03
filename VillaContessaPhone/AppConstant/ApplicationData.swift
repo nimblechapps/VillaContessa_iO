@@ -17,7 +17,7 @@ class ApplicationData: NSObject {
     var hostIndex = 0
     var isReachable: Bool = false;
     
-    // MARK: -
+    // MARK: - Initializer
     private override init() {
         super.init()
         startHost(at: 0)

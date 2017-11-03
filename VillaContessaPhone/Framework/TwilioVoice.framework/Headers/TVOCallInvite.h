@@ -18,7 +18,7 @@ typedef NS_ENUM(NSUInteger, TVOCallInviteState) {
     TVOCallInviteStatePending = 0,      ///< The call invite is pending for action.
     TVOCallInviteStateAccepted,         ///< The call invite has been accepted.
     TVOCallInviteStateRejected,         ///< The call invite has been rejected.
-    TVOCallInviteStateCancelled         ///< The call invite has been cancelled by the caller.
+    TVOCallInviteStateCanceled          ///< The call invite has been canceled by the caller.
 };
 
 
@@ -35,22 +35,24 @@ typedef NS_ENUM(NSUInteger, TVOCallInviteState) {
  */
 
 /**
- * `From` value of the call invite.
+ * @brief `From` value of the call invite.
  */
 @property (nonatomic, strong, readonly, nonnull) NSString *from;
 
 /**
- * `To` value of the call invite.
+ * @brief `To` value of the call invite.
  */
 @property (nonatomic, strong, readonly, nonnull) NSString *to;
 
 /**
- * `Call SID` value of the call invite.
+ * @brief `Call SID` value of the call invite.
  */
 @property (nonatomic, strong, readonly, nonnull) NSString *callSid;
 
 /**
- * State of the call invite.
+ * @brief State of the call invite.
+ *
+ * @see TVOCallInviteState
  */
 @property (nonatomic, assign, readonly) TVOCallInviteState state;
 
@@ -59,12 +61,16 @@ typedef NS_ENUM(NSUInteger, TVOCallInviteState) {
  */
 
 /**
- * Accepts the incoming call invite.
+ * @brief Accepts the incoming call invite.
+ *
+ * @param delegate The `<TVOCallDelegate>` object that will receive call state updates.
+ *
+ * @see TVOCallDelegate
  */
 - (nullable TVOCall *)acceptWithDelegate:(nonnull id<TVOCallDelegate>)delegate;
 
 /**
- * Rejects the incoming call invite.
+ * @brief Rejects the incoming call invite.
  */
 - (void)reject;
 
@@ -80,9 +86,9 @@ typedef NS_ENUM(NSUInteger, TVOCallInviteState) {
 @interface TVOCallInvite (CallKitIntegration)
 
 /**
- * UUID of the call.
+ * @brief UUID of the call.
  *
- * Use this UUID for CallKit methods.
+ * @discussion Use this UUID for CallKit methods.
  */
 @property (nonatomic, strong, readonly, nonnull) NSUUID *uuid;
 

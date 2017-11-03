@@ -12,7 +12,6 @@ import MediaPlayer
 import UserNotifications
 import PushKit
 import TwilioVoice
-import TwilioSyncClient
 import Firebase
 
 class ViewController: UIViewController, PKPushRegistryDelegate, AVAudioPlayerDelegate, TVONotificationDelegate, TVOCallDelegate {
@@ -65,10 +64,6 @@ class ViewController: UIViewController, PKPushRegistryDelegate, AVAudioPlayerDel
     var ringtonePlayer: AVAudioPlayer?
     var ringtonePlaybackCallback: (() -> ())?
     
-    // For Sync Call status
-    var document : TWSDocument?
-    var currentBoard = [String : Any]()
-    
     // Font Name
     let fontName = "Garamond-Roman"    
     
@@ -81,28 +76,24 @@ class ViewController: UIViewController, PKPushRegistryDelegate, AVAudioPlayerDel
         voipRegistry.delegate = self
         voipRegistry.desiredPushTypes = Set([PKPushType.voIP])
         
-        TwilioVoice.sharedInstance().logLevel = .verbose
+        TwilioVoice.logLevel = .verbose
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         NSLog("viewDidLoad")
+        appDelegate.delegate = self
         initialUI()
-        
-        self.lblRoomNo.text = ""
-        currentBoard = emptyBoard()
+        // Delay execution of my block for 2 seconds.
+        let delayTime = DispatchTime.now() + 2 // change 5 to desired number of seconds
+        DispatchQueue.main.asyncAfter(deadline: delayTime) {
+            self.getUserIdentity()
+        }
     }
     
     override var prefersStatusBarHidden: Bool {
         return true
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        NSLog("viewDidAppear")
-        SyncManager.shared.login()
-        getStatus()
     }
 
     override func didReceiveMemoryWarning() {
@@ -110,69 +101,14 @@ class ViewController: UIViewController, PKPushRegistryDelegate, AVAudioPlayerDel
         // Dispose of any resources that can be recreated.
     }
     
+    // MARK: - Custom Method
+    func getUserIdentity() {
+        NSLog("Twilio Token : %@", SyncManager.shared.generateToken()!);
+        setRoomIdentity()
+    }
+    
     func setVolumeTo() {
         (MPVolumeView().subviews.filter{NSStringFromClass($0.classForCoder) == "MPVolumeSlider"}.first as? UISlider)?.setValue(1, animated: false)
-    }
-    
-    // MARK: - Twilio Sync Data Method
-    func getStatus() {
-        NSLog("getStatus")
-        let gameBoardName = SyncManager.shared.identity
-        if let syncClient = SyncManager.shared.syncClient,
-            let options = TWSOpenOptions.withUniqueName(gameBoardName!) {
-            syncClient.openDocument(
-                with: options,
-                delegate: self,
-                completion: { (result, document) in
-                    if !(result?.isSuccessful())! {
-                        NSLog("TTT: error creating document: %@", String(describing: result?.error?.localizedDescription))
-                    } else {
-                        self.document = document
-                        self.updateBoardFromDocument()
-                    }
-            })
-        }
-    }
-    
-    func emptyBoard() -> [String: Any] {
-        return ["date_updated":"\(Date())",
-            "status": "none"]
-    }
-    
-    func updateBoardFromDocument() {
-        NSLog("updateBoardFromDocument")
-        if let document = document {
-            let data = document.getData()
-            if let board = data["board"] as? [String: String] {
-                self.currentBoard = board
-                print("board : \(board)");
-            }
-            else {
-                self.currentBoard = emptyBoard()
-                updateDataOnBoard()
-            }
-            // Update UI
-            DispatchQueue.main.async(execute: {
-                if self.currentBoard["status"] as! String == "in-progress" {
-                    self.callConnectedUI()
-                }
-//                else if self.currentBoard["status"] as! String == "no-answer" {
-//                    self.call = nil
-//                    self.callInvite = nil
-//                    self.callEndedUI()
-//                }
-            })
-        }
-    }
-    
-    func updateDataOnBoard() {
-        NSLog("updateDataOnBoard")
-        let newData = ["board": self.currentBoard]
-        document?.setData(newData, flowId: 1, completion: { (result) in
-            if !(result?.isSuccessful())! {
-                print("TTT: error updating the board: \(String(describing: result?.error))")
-            }
-        })
     }
     
     // MARK: - UI changes Method
@@ -287,8 +223,11 @@ class ViewController: UIViewController, PKPushRegistryDelegate, AVAudioPlayerDel
     
     func setRoomIdentity() {
         var identity = SyncManager.shared.identity
-        identity = identity?.replacingOccurrences(of: "_", with: " ").components(separatedBy: " ").last
-        self.lblRoomNo.text = "Zimmer"+" \(identity!)"
+        //identity = identity?.replacingOccurrences(of: "_", with: " ").components(separatedBy: " ").last
+        identity = identity?.components(separatedBy: "_").last
+        if (identity != nil) {
+            self.lblRoomNo.text = "Zimmer"+" \(identity!)"
+        }
     }
     
     func showReceptionCall(isOut: Bool) {
@@ -324,7 +263,8 @@ class ViewController: UIViewController, PKPushRegistryDelegate, AVAudioPlayerDel
         
         self.viewRestaurant.isHidden = true
         self.viewCalling.isHidden = false
-        setVolumeTo()
+        
+        //setRoomIdentity()
     }
     
     func showRestaurantCall(isOut: Bool) {
@@ -361,7 +301,8 @@ class ViewController: UIViewController, PKPushRegistryDelegate, AVAudioPlayerDel
         self.lblRestaurantSub.font = UIFont(name: fontName, size: 28.0)
         
         self.viewCalling.isHidden = false
-        setVolumeTo()
+        
+        //setRoomIdentity()
     }
     
     // MARK: - IBAction Method
@@ -369,70 +310,63 @@ class ViewController: UIViewController, PKPushRegistryDelegate, AVAudioPlayerDel
         NSLog("receptionButtonTapped")
         FIRAnalytics.logEvent(withName: "receptionButtonTapped", parameters: ["ReceptionTapped" : "Reception Button Tapped" as NSObject])
 
-        toggleButtonState(isEnabled: false)
-        guard let accessToken = SyncManager.shared.generateToken() else {
-            toggleButtonState(isEnabled: true)
-            UIAlertController().alertControllerWithTitle(kInValidAccessToken, message: "", okButtonTitle: "OK", okBlockHandler: {
-            }, viewController: self)
-            return
-        }
-        
-        setRoomIdentity()
-        
+        //toggleButtonState(isEnabled: false)
         if (self.call != nil) {
             self.call?.disconnect()
+            toggleButtonState(isEnabled: false)
         }
-        
-//        playOutgoingRingtone(completion: { [weak self] in
-//            if let strongSelf = self {
-                self.call = TwilioVoice.sharedInstance().call(accessToken, params: ["From":"\(User_1)", "To":"\(Reception)"], delegate: self)
-                if (self.call == nil) {
-                    NSLog("Failed to start outgoing reception call.")
-                    self.toggleButtonState(isEnabled: true)
-                    return
-                }
-                else {
-                    showReceptionCall(isOut: true)
-                }
-//            }
-//        })
-        NSLog("restaurantButtonTapped: %@ To %@",User_1, Reception)
-        FIRAnalytics.logEvent(withName: "receptionCall", parameters: ["ReceptionCallData" : "\(call.debugDescription)" as NSObject])
+        else {
+            guard let accessToken = SyncManager.shared.generateToken() else {
+                toggleButtonState(isEnabled: true)
+                UIAlertController().alertControllerWithTitle(kInValidAccessToken, message: "", okButtonTitle: "OK", okBlockHandler: {
+                }, viewController: self)
+                return
+            }
+            
+            self.call = TwilioVoice.call(accessToken, params: ["From":"\(User_1)", "To":"\(Reception)"], delegate: self)
+            if (self.call == nil) {
+                NSLog("Failed to start outgoing reception call.")
+                self.toggleButtonState(isEnabled: true)
+                return
+            }
+            else {
+                showReceptionCall(isOut: true)
+            
+            }
+            NSLog("restaurantButtonTapped: %@ To %@",User_1, Reception)
+            FIRAnalytics.logEvent(withName: "receptionCall", parameters: ["ReceptionCallData" : "\(call.debugDescription)" as NSObject])
+        }
     }
     
     @IBAction func restaurantButtonTapped(_ sender: UIButton) {
         NSLog("restaurantButtonTapped")
         FIRAnalytics.logEvent(withName: "restaurantButtonTapped", parameters: ["RestaurantTapped" : "Restaurant Button Tapped" as NSObject])
         
-        toggleButtonState(isEnabled: false)
-        guard let accessToken = SyncManager.shared.generateToken() else {
-            toggleButtonState(isEnabled: true)
-            UIAlertController().alertControllerWithTitle(kInValidAccessToken, message: "", okButtonTitle: "OK", okBlockHandler: {
-            }, viewController: self)
-            return
-        }
-        
-        setRoomIdentity()
-
+        //toggleButtonState(isEnabled: false)
         if (self.call != nil) {
             self.call?.disconnect()
+            toggleButtonState(isEnabled: false)
         }
-        
-//        playOutgoingRingtone(completion: { [weak self] in
-//            if let strongSelf = self {
-                self.call = TwilioVoice.sharedInstance().call(accessToken, params: ["From":"\(User_1)", "To":"\(Restaurant)"], delegate: self)
-                if (self.call == nil) {
-                    NSLog("Failed to start outgoing restaurant call.")
-                    self.toggleButtonState(isEnabled: true)
-                    return
-                }
-                else {
-                    showRestaurantCall(isOut: true)
-                }
-//            }
-//        })
-        NSLog("restaurantButtonTapped: %@ To %@",User_1, Restaurant)
-        FIRAnalytics.logEvent(withName: "restaurantCall", parameters: ["RestaurantCallData" : "\(call.debugDescription)" as NSObject])
+        else {
+            guard let accessToken = SyncManager.shared.generateToken() else {
+                toggleButtonState(isEnabled: true)
+                UIAlertController().alertControllerWithTitle(kInValidAccessToken, message: "", okButtonTitle: "OK", okBlockHandler: {
+                }, viewController: self)
+                return
+            }
+            
+            self.call = TwilioVoice.call(accessToken, params: ["From":"\(User_1)", "To":"\(Restaurant)"], delegate: self)
+            if (self.call == nil) {
+                NSLog("Failed to start outgoing restaurant call.")
+                self.toggleButtonState(isEnabled: true)
+                return
+            }
+            else {
+                showRestaurantCall(isOut: true)
+            }
+            NSLog("restaurantButtonTapped: %@ To %@",User_1, Restaurant)
+            FIRAnalytics.logEvent(withName: "restaurantCall", parameters: ["RestaurantCallData" : "\(call.debugDescription)" as NSObject])
+        }
     }
     
     @IBAction func hangUpButtonTapped(_ sender: UIButton) {
@@ -445,7 +379,7 @@ class ViewController: UIViewController, PKPushRegistryDelegate, AVAudioPlayerDel
             })
             toggleButtonState(isEnabled: false)
         }
-        else if (self.callInvite != nil) {
+/*        else if (self.callInvite != nil) {
             NSLog("inComingCallhangUpTapped")
             FIRAnalytics.logEvent(withName: "inComingCallTapped", parameters: ["InComingCallEnd" : "\(callInvite.debugDescription)" as NSObject])
             DispatchQueue.main.async(execute: {
@@ -454,16 +388,17 @@ class ViewController: UIViewController, PKPushRegistryDelegate, AVAudioPlayerDel
                 self.callInvite = nil
             })
         }
+*/
     }
     
     @IBAction func acceptButtonTapped(_ sender: UIButton) {
         NSLog("acceptButtonTapped")
         FIRAnalytics.logEvent(withName: "acceptButtonTapped", parameters: ["AcceptButtonTapped" : "\(callInvite.debugDescription)" as NSObject])
-        self.stopIncomingRingtone(completion: {_ in
-        })
+        self.stopIncomingRingtone()
         DispatchQueue.main.async(execute: {
             // ON MAINTHREAD
-            self.callInvite!.accept(with: self)
+            self.call = self.callInvite!.accept(with: self)
+            self.callInvite = nil
             
             self.callConnectedUI()
             self.btnAccept.isHidden = true
@@ -481,15 +416,15 @@ class ViewController: UIViewController, PKPushRegistryDelegate, AVAudioPlayerDel
         }
         
         let deviceToken = (credentials.token as NSData).description
-        
+
         guard let accessToken = SyncManager.shared.generateToken() else {
             return
         }
-        
-        setRoomIdentity()
+
+        //setRoomIdentity()
         
         FIRAnalytics.logEvent(withName: "pushRegistrydidUpdate", parameters: ["PushRegistrydidUpdate" : "\(accessToken)" as NSObject])
-        TwilioVoice.sharedInstance().register(withAccessToken: accessToken, deviceToken: deviceToken) { (error) in
+        TwilioVoice.register(withAccessToken: accessToken, deviceToken: deviceToken) { (error) in
             if (error != nil) {
                 NSLog("An error occurred while registering: %@",String(describing: error?.localizedDescription))
             }
@@ -513,7 +448,7 @@ class ViewController: UIViewController, PKPushRegistryDelegate, AVAudioPlayerDel
         }
         
         FIRAnalytics.logEvent(withName: "pushRegistrydidInvalidatePushTokenForType", parameters: ["PushRegistryDidInvalidatePushTokenForType" : "\(accessToken)" as NSObject])
-        TwilioVoice.sharedInstance().unregister(withAccessToken: accessToken, deviceToken: deviceToken) { (error) in
+        TwilioVoice.unregister(withAccessToken: accessToken, deviceToken: deviceToken) { (error) in
             if (error != nil) {
                 NSLog("An error occurred while unregistering: %@",String(describing: error?.localizedDescription))
             }
@@ -530,12 +465,21 @@ class ViewController: UIViewController, PKPushRegistryDelegate, AVAudioPlayerDel
         
         FIRAnalytics.logEvent(withName: "pushRegistrydidReceiveIncomingPushWith", parameters: ["PushRegistryDidReceiveIncomingPushWith" : "\(payload.dictionaryPayload)" as NSObject])
         if (type == .voIP) {
-            TwilioVoice.sharedInstance().handleNotification(payload.dictionaryPayload, delegate: self)
+            TwilioVoice.handleNotification(payload.dictionaryPayload, delegate: self)
         }
     }
     
     // MARK: - TVONotificationDelegate
     func callInviteReceived(_ callInvite: TVOCallInvite) {
+        if (callInvite.state == .pending) {
+            handleCallInviteReceived(callInvite)
+        }
+        else if (callInvite.state == .canceled) {
+            handleCallInviteCanceled(callInvite)
+        }
+    }
+    
+    func handleCallInviteReceived(_ callInvite: TVOCallInvite) {
         NSLog("callInviteReceived:")
         
         if (self.callInvite != nil && self.callInvite?.state == .pending) {
@@ -560,7 +504,7 @@ class ViewController: UIViewController, PKPushRegistryDelegate, AVAudioPlayerDel
         else if !from.isEmpty && from == Restaurant {
             showRestaurantCall(isOut: false)
         }
-        
+            
         else {
             showReceptionCall(isOut: false)
             callerType = .other
@@ -592,21 +536,22 @@ class ViewController: UIViewController, PKPushRegistryDelegate, AVAudioPlayerDel
                 // Fallback on earlier versions
                 let notification = UILocalNotification()
                 notification.alertBody = "\(from) ruft an"
+                notification.applicationIconBadgeNumber = 0
                 UIApplication.shared.presentLocalNotificationNow(notification)
             }
         }
     }
     
-    func callInviteCancelled(_ callInvite: TVOCallInvite?) {
+    func handleCallInviteCanceled(_ callInvite: TVOCallInvite) {
         NSLog("callInviteCancelled:")
         
-        FIRAnalytics.logEvent(withName: "callInviteCancelled", parameters: ["CallInviteCancelled" : "\(String(describing: callInvite?.from))" as NSObject])
-        if (callInvite?.callSid != self.callInvite?.callSid) {
-            NSLog("Incoming (but not current) call invite from %@ cancelled. Just ignore it.", String(describing: callInvite?.from))
+        FIRAnalytics.logEvent(withName: "callInviteCancelled", parameters: ["CallInviteCancelled" : "\(String(describing: callInvite.from))" as NSObject])
+        if (callInvite.callSid != self.callInvite?.callSid) {
+            NSLog("Incoming (but not current) call invite from %@ cancelled. Just ignore it.", String(describing: callInvite.from))
             return;
         }
         
-        self.stopIncomingRingtone(completion: nil)
+        self.stopIncomingRingtone()
         
         self.callInvite = nil
         if #available(iOS 10.0, *) {
@@ -628,6 +573,8 @@ class ViewController: UIViewController, PKPushRegistryDelegate, AVAudioPlayerDel
     }
     
     // MARK: TVOCallDelegate
+    
+    
     func callDidConnect(_ call: TVOCall) {
         NSLog("callDidConnect:")
         FIRAnalytics.logEvent(withName: "callDidConnect", parameters: ["CallDidConnect" : "\(call.debugDescription)" as NSObject])
@@ -637,7 +584,8 @@ class ViewController: UIViewController, PKPushRegistryDelegate, AVAudioPlayerDel
         routeAudioToSpeaker()
     }
     
-    func callDidDisconnect(_ call: TVOCall) {
+    //func callDidDisconnect(_ call: TVOCall) {
+    func call(_ call: TVOCall, didDisconnectWithError error: Error?) {
         NSLog("callDidDisconnect:")
         FIRAnalytics.logEvent(withName: "callDidDisconnect", parameters: ["CallDidDisconnect" : "\(call.debugDescription)" as NSObject])
         
@@ -647,13 +595,14 @@ class ViewController: UIViewController, PKPushRegistryDelegate, AVAudioPlayerDel
         callEndedUI()
     }
     
-    func call(_ call: TVOCall, didFailWithError error: Error) {
+    //func call(_ call: TVOCall, didFailWithError error: Error) {
+    func call(_ call: TVOCall, didFailToConnectWithError error: Error) {
         NSLog("call:didFailWithError: %@",error.localizedDescription)
         FIRAnalytics.logEvent(withName: "calldidFailWithError", parameters: ["CallDidFailWithError" : "\(error.localizedDescription)" as NSObject])
         
         self.call = nil
         self.callInvite = nil
-
+        
         initialUI()
     }
     
@@ -696,15 +645,18 @@ class ViewController: UIViewController, PKPushRegistryDelegate, AVAudioPlayerDel
         }
     }
     
-    func stopIncomingRingtone(completion: ((Void?) -> Void)?) {
-        self.ringtonePlaybackCallback = completion
+    func stopIncomingRingtone() {
         if (self.ringtonePlayer?.isPlaying == false) {
-            self.ringtonePlaybackCallback?()
             return
         }
         
-        self.ringtonePlayer?.delegate = self
-        self.ringtonePlayer?.numberOfLoops = 0
+        self.ringtonePlayer?.stop()
+        
+        do {
+            try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayAndRecord)
+        } catch {
+            NSLog(error.localizedDescription)
+        }
     }
     
     func playDisconnectSound() {
@@ -747,23 +699,10 @@ class ViewController: UIViewController, PKPushRegistryDelegate, AVAudioPlayerDel
     }
 }
 
-// MARK: - ViewController: TWSDocumentDelegate
-extension ViewController: TWSDocumentDelegate {
-    func onDocument(_ document: TWSDocument, resultDataUpdated data: [String : Any], forFlowID flowId: UInt) {
-        self.document = document
-        self.updateBoardFromDocument()
-        print("TTT: document: \(document) data: \(data) flowId: \(flowId)")
-    }
-    
-    func onDocument(_ document: TWSDocument, remoteUpdated data: [String : Any]) {
-        self.document = document
-        self.updateBoardFromDocument()
-        print("TTT: document: \(document) data: \(data)")
-    }
-    
-    func onDocument(_ document: TWSDocument, remoteErrorOccurred error: TWSError) {
-        self.document = document
-        print("TTT: document: \(document) error: \(error)")
+// MARK: - ViewController: UpdateUIDelegate
+extension ViewController: UpdateUIDelegate {
+    func UpdateUI() {
+        callConnectedUI()
     }
 }
 

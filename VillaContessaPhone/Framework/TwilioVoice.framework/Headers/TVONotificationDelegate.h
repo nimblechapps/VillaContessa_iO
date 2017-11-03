@@ -11,12 +11,19 @@
 
 /**
  * The `TVONotificationDelegate`'s methods allow the delegate to be informed when
- * incoming call invites are received or cancelled.
+ * incoming call invites are received or canceled.
  */
 @protocol TVONotificationDelegate <NSObject>
 
 /**
- * Notifies the delegate that an incoming call invite has been received.
+ * @name Required Methods
+ */
+
+/**
+ * @brief Notifies the delegate that a call invite was received.
+ *
+ * @discussion A call invite may be in the `TVOCallInviteStatePending` or 
+ * `TVOCallInviteStateCanceled` state.
  *
  * @param callInvite A `<TVOCallInvite>` object.
  *
@@ -25,17 +32,7 @@
 - (void)callInviteReceived:(nonnull TVOCallInvite *)callInvite;
 
 /**
- * Notifies the delegate that an incoming call invite has been cancelled.
- *
- * @param callInvite A `<TVOCallInvite>` object. ***Note:*** This may be `nil` if
- *                   a `<TVOCallInvite>` object was not previously created.
- *
- * @see TVOCallInvite
- */
-- (void)callInviteCancelled:(nullable TVOCallInvite *)callInvite;
-
-/**
- * Notifies the delegate that an error occurred when processing the `VoIP`
+ * @brief Notifies the delegate that an error occurred when processing the `VoIP`
  * push notification payload.
  *
  * @param error An `NSError` object describing the error.

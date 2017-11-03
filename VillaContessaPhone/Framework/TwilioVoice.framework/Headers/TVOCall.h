@@ -22,7 +22,7 @@ typedef NS_ENUM(NSUInteger, TVOCallState) {
 /**
  * The `TVOCall` object represents a call. `TVOCall` objects are not created directly; they
  * are returned by the `<[TVOCallInvite acceptWithDelegate:]>` method or the
- * `<[Voice call:params:delegate:]>` method.
+ * `<[TwilioVoice call:params:delegate:]>` method.
  */
 @interface TVOCall : NSObject
 
@@ -32,38 +32,42 @@ typedef NS_ENUM(NSUInteger, TVOCallState) {
  */
 
 /**
- * The `<TVOCallDelegate>` object that will receive call state updates.
+ * @brief The `<TVOCallDelegate>` object that will receive call state updates.
  *
  * @see TVOCallDelegate
  */
 @property (nonatomic, weak, nullable) id<TVOCallDelegate> delegate;
 
 /**
- * `From` value of the call. ***Note:*** This may be `nil` if the call object was created
- * by calling the `<[Voice call:params:delegate:]>` method.
+ * @brief `From` value of the call.
+ *
+ * @discussion This may be `nil` if the call object was created by calling the 
+ * `<[TwilioVoice call:params:delegate:]>` method.
  */
 @property (nonatomic, strong, readonly, nonnull) NSString *from;
 
 /**
- * `To` value of the call. ***Note:*** This may be `nil` if the call object was created
- * by calling the `<[Voice call:params:delegate:]>` method.
+ * @brief `To` value of the call.
+ *
+ * @discussion This may be `nil` if the call object was created by calling the 
+ * `<[TwilioVoice call:params:delegate:]>` method.
  */
 @property (nonatomic, strong, readonly, nonnull) NSString *to;
 
 /**
- * `Call SID` value of the call.
+ * @brief `Call SID` value of the call.
  */
-@property (nonatomic, strong, readonly, nonnull) NSString *callSid;
+@property (nonatomic, strong, readonly, nonnull) NSString *sid;
 
 /**
- * Property that defines if the call is muted.
+ * @brief Property that defines if the call is muted.
  *
- * Setting the property will only take effect if the `<state>` is `TVOCallConnected`.
+ * @discussion Setting the property will only take effect if the `<state>` is `TVOCallConnected`.
  */
 @property (nonatomic, assign, getter=isMuted) BOOL muted;
 
 /**
- * State of the call.
+ * @brief State of the call.
  *
  * @see TVOCallState
  */
@@ -75,17 +79,17 @@ typedef NS_ENUM(NSUInteger, TVOCallState) {
  */
 
 /**
- * Disconnects the call.
+ * @brief Disconnects the call.
  *
- * Calling this method on a `TVOCall` that does not have the `<state>` of `TVOCallStateConnected` 
+ * @discussion Calling this method on a `TVOCall` that does not have the `<state>` of `TVOCallStateConnected`
  * will have no effect.
  */
 - (void)disconnect;
 
 /**
- * Send a string of digits.
+ * @brief Send a string of digits.
  *
- * Calling this method on a `TVOCall` that does not have the `<state>` of `TVOCallStateConnected`
+ * @discussion Calling this method on a `TVOCall` that does not have the `<state>` of `TVOCallStateConnected`
  * will have no effect.
  *
  * @param digits A string of characters to be played. Valid values are '0' - '9', '*', '#', and 'w'.
@@ -94,7 +98,7 @@ typedef NS_ENUM(NSUInteger, TVOCallState) {
 - (void)sendDigits:(nonnull NSString *)digits;
 
 
-- (null_unspecified instancetype)init __attribute__((unavailable("Calls cannot be instantiated directly. See `TVOCallInvite acceptWithDelegate:` or `Voice call:params:delegate:`")));
+- (null_unspecified instancetype)init __attribute__((unavailable("Calls cannot be instantiated directly. See `TVOCallInvite acceptWithDelegate:` or `TwilioVoice call:params:delegate:`")));
 
 @end
 
@@ -105,9 +109,9 @@ typedef NS_ENUM(NSUInteger, TVOCallState) {
 @interface TVOCall (CallKitIntegration)
 
 /**
- * UUID of the call.
+ * @brief UUID of the call.
  *
- * Use this UUID for CallKit methods.
+ * @discussion Use this UUID for CallKit methods.
  */
 @property (nonatomic, strong, nonnull) NSUUID *uuid;
 

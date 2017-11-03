@@ -15,12 +15,11 @@
 		68187CD41E8E77B8008E5BA6 /* disconnect.wav in Resources */ = {isa = PBXBuildFile; fileRef = 68187CD11E8E77B8008E5BA6 /* disconnect.wav */; };
 		68187CD51E8E77B8008E5BA6 /* incoming.wav in Resources */ = {isa = PBXBuildFile; fileRef = 68187CD21E8E77B8008E5BA6 /* incoming.wav */; };
 		68187CD61E8E77B8008E5BA6 /* outgoing.wav in Resources */ = {isa = PBXBuildFile; fileRef = 68187CD31E8E77B8008E5BA6 /* outgoing.wav */; };
-		683595811EBC41C50034E280 /* TwilioSyncClient.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6835957E1EBC41AF0034E280 /* TwilioSyncClient.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		683595831EBC42370034E280 /* SyncManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683595821EBC42370034E280 /* SyncManager.swift */; };
 		6849CB8E1E938A0100E79990 /* BasicAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6849CB8D1E938A0100E79990 /* BasicAlertController.swift */; };
 		684B62BE1F163554001A99C5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 684B62BA1F163554001A99C5 /* Main.storyboard */; };
 		684B62BF1F163554001A99C5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 684B62BC1F163554001A99C5 /* LaunchScreen.storyboard */; };
 		6852F71A1E9F94AC00CF9D40 /* TwilioVoice.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6852F7171E9F949200CF9D40 /* TwilioVoice.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		68584E211FAAD00000D3C3AF /* SyncManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68584E201FAAD00000D3C3AF /* SyncManager.swift */; };
 		685DD0971F63ABE00007C098 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 685DD0961F63ABE00007C098 /* GoogleService-Info.plist */; };
 		686249F51E9205F000C10A49 /* DotsLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 686249F41E9205F000C10A49 /* DotsLoader.swift */; };
 		688264631EFD1DDA00E49986 /* Garamond Roman.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 688264621EFD1DDA00E49986 /* Garamond Roman.ttf */; };
@@ -37,7 +36,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				683595811EBC41C50034E280 /* TwilioSyncClient.framework in Embed Frameworks */,
 				6852F71A1E9F94AC00CF9D40 /* TwilioVoice.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -53,12 +51,11 @@
 		68187CD11E8E77B8008E5BA6 /* disconnect.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = disconnect.wav; sourceTree = "<group>"; };
 		68187CD21E8E77B8008E5BA6 /* incoming.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = incoming.wav; sourceTree = "<group>"; };
 		68187CD31E8E77B8008E5BA6 /* outgoing.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = outgoing.wav; sourceTree = "<group>"; };
-		6835957E1EBC41AF0034E280 /* TwilioSyncClient.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TwilioSyncClient.framework; sourceTree = "<group>"; };
-		683595821EBC42370034E280 /* SyncManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SyncManager.swift; sourceTree = "<group>"; };
 		6849CB8D1E938A0100E79990 /* BasicAlertController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicAlertController.swift; sourceTree = "<group>"; };
 		684B62BB1F163554001A99C5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = VillaContessaPhone/Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		684B62BD1F163554001A99C5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = VillaContessaPhone/Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6852F7171E9F949200CF9D40 /* TwilioVoice.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TwilioVoice.framework; sourceTree = "<group>"; };
+		68584E201FAAD00000D3C3AF /* SyncManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SyncManager.swift; sourceTree = "<group>"; };
 		685DD0961F63ABE00007C098 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		686249F41E9205F000C10A49 /* DotsLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DotsLoader.swift; sourceTree = "<group>"; };
 		688264621EFD1DDA00E49986 /* Garamond Roman.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Garamond Roman.ttf"; sourceTree = "<group>"; };
@@ -111,7 +108,7 @@
 				68187CCA1E8E36CE008E5BA6 /* ApplicationData.swift */,
 				68187CCC1E8E3723008E5BA6 /* AppConstant.swift */,
 				6849CB8D1E938A0100E79990 /* BasicAlertController.swift */,
-				683595821EBC42370034E280 /* SyncManager.swift */,
+				68584E201FAAD00000D3C3AF /* SyncManager.swift */,
 			);
 			path = AppConstant;
 			sourceTree = "<group>";
@@ -218,7 +215,6 @@
 		68A7E3861E4ED71F00F9D776 /* Framework */ = {
 			isa = PBXGroup;
 			children = (
-				6835957E1EBC41AF0034E280 /* TwilioSyncClient.framework */,
 				6852F7171E9F949200CF9D40 /* TwilioVoice.framework */,
 			);
 			path = Framework;
@@ -365,9 +361,9 @@
 			files = (
 				68A7E3841E4ED68000F9D776 /* ViewController.swift in Sources */,
 				6849CB8E1E938A0100E79990 /* BasicAlertController.swift in Sources */,
-				683595831EBC42370034E280 /* SyncManager.swift in Sources */,
 				68A7E3831E4ED68000F9D776 /* AppDelegate.swift in Sources */,
 				68187CCB1E8E36CE008E5BA6 /* ApplicationData.swift in Sources */,
+				68584E211FAAD00000D3C3AF /* SyncManager.swift in Sources */,
 				68187CCD1E8E3723008E5BA6 /* AppConstant.swift in Sources */,
 				68138B481F76137600CAAFC4 /* Reachability.swift in Sources */,
 				686249F51E9205F000C10A49 /* DotsLoader.swift in Sources */,
@@ -515,7 +511,7 @@
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.nimblechapps.twiliocall;
 				PRODUCT_NAME = "Villa Contessa Phone";
-				PROVISIONING_PROFILE = "63db76c6-e1ae-4360-9e50-51e2e8b13c07";
+				PROVISIONING_PROFILE = "a68dfe7b-8ffe-41f6-8dcd-2cd427dfc5ab";
 				PROVISIONING_PROFILE_SPECIFIER = TwilioCallAdhocPush;
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -544,7 +540,7 @@
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.nimblechapps.twiliocall;
 				PRODUCT_NAME = "Villa Contessa Phone";
-				PROVISIONING_PROFILE = "63db76c6-e1ae-4360-9e50-51e2e8b13c07";
+				PROVISIONING_PROFILE = "a68dfe7b-8ffe-41f6-8dcd-2cd427dfc5ab";
 				PROVISIONING_PROFILE_SPECIFIER = TwilioCallAdhocPush;
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
