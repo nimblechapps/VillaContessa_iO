@@ -56,7 +56,7 @@ let registerTokenEndpoint   = "/savetoken.php"
 let kNoInternet             = "The Internet connection appears to be offline."
 let kInValidAccessToken     = "Something goes wrong please try after some time."
 
-let User_1 = "+4933614929006"
+let User_1 = "+4933614929001"
 
 //let User_1 = "+4933614929001"
 //let User_2 = "+4933614929002"
@@ -67,8 +67,8 @@ let User_1 = "+4933614929006"
 //let User_7 = "+4933614929007"
 //let User_8 = "+4933614929008"
 
-let Reception = "+4933614929005"
-let Restaurant = "+4933614929005"
+let Reception = "+493363158018"
+let Restaurant = "+493363158018"
 
 //let Reception = "+493363158018"
 //let Restaurant = "+491773141473"

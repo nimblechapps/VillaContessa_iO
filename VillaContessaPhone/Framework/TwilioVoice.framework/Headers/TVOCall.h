@@ -44,7 +44,7 @@ typedef NS_ENUM(NSUInteger, TVOCallState) {
  * @discussion This may be `nil` if the call object was created by calling the 
  * `<[TwilioVoice call:params:delegate:]>` method.
  */
-@property (nonatomic, strong, readonly, nonnull) NSString *from;
+@property (nonatomic, strong, readonly, nullable) NSString *from;
 
 /**
  * @brief `To` value of the call.
@@ -52,7 +52,7 @@ typedef NS_ENUM(NSUInteger, TVOCallState) {
  * @discussion This may be `nil` if the call object was created by calling the 
  * `<[TwilioVoice call:params:delegate:]>` method.
  */
-@property (nonatomic, strong, readonly, nonnull) NSString *to;
+@property (nonatomic, strong, readonly, nullable) NSString *to;
 
 /**
  * @brief `Call SID` value of the call.
@@ -113,6 +113,6 @@ typedef NS_ENUM(NSUInteger, TVOCallState) {
  *
  * @discussion Use this UUID for CallKit methods.
  */
-@property (nonatomic, strong, nonnull) NSUUID *uuid;
+@property (nonatomic, strong, nullable) NSUUID *uuid;
 
 @end

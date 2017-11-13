@@ -511,7 +511,7 @@
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.nimblechapps.twiliocall;
 				PRODUCT_NAME = "Villa Contessa Phone";
-				PROVISIONING_PROFILE = "a68dfe7b-8ffe-41f6-8dcd-2cd427dfc5ab";
+				PROVISIONING_PROFILE = "db2322d8-606d-4c00-8184-418e66127f5c";
 				PROVISIONING_PROFILE_SPECIFIER = TwilioCallAdhocPush;
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -540,7 +540,7 @@
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.nimblechapps.twiliocall;
 				PRODUCT_NAME = "Villa Contessa Phone";
-				PROVISIONING_PROFILE = "a68dfe7b-8ffe-41f6-8dcd-2cd427dfc5ab";
+				PROVISIONING_PROFILE = "db2322d8-606d-4c00-8184-418e66127f5c";
 				PROVISIONING_PROFILE_SPECIFIER = TwilioCallAdhocPush;
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
