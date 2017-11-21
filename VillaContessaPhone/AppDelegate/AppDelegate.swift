@@ -88,7 +88,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any]) {
         //if (UIApplication.shared.applicationState == UIApplicationState.active) {
-            if let aps = userInfo["aps"] as? NSDictionary {
+            /*if let aps = userInfo["aps"] as? NSDictionary {
                 if let alert = aps["alert"] as? NSDictionary {
                     if let body = alert["body"] as? NSString {
                         if body == "inprogress" {
@@ -98,7 +98,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                         }
                     }
                 }
-            }
+            }*/
         //}
     }
     
@@ -106,22 +106,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     func userNotificationCenter(_ center: UNUserNotificationCenter,  willPresent notification: UNNotification, withCompletionHandler   completionHandler: @escaping (_ options:   UNNotificationPresentationOptions) -> Void) {
         print("Handle push from foreground")
         print("\(notification.request.content.userInfo)")
-        if notification.request.content.body == "inprogress" {
+        /*if notification.request.content.body == "inprogress" {
             self.delegate.UpdateUI()
             //UIAlertController().alertControllerWithTitle(notification.request.content.body, message: "", okButtonTitle: "OK", okBlockHandler: {
             //}, viewController: self.window?.rootViewController)
-        }
+        }*/
     }
     
     @available(iOS 10.0, *)
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         print("Handle push from background or closed")
         print("\(response.notification.request.content.userInfo)")
-        if response.notification.request.content.body == "inprogress" {
+        /*if response.notification.request.content.body == "inprogress" {
             self.delegate.UpdateUI()
             //UIAlertController().alertControllerWithTitle(response.notification.request.content.body, message: "", okButtonTitle: "OK", okBlockHandler: {
             //}, viewController: self.window?.rootViewController)
-        }
+        }*/
     }
  
     // MARK:- Private Method

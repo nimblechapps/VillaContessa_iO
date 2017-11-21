@@ -64,6 +64,8 @@ class ViewController: UIViewController, PKPushRegistryDelegate, AVAudioPlayerDel
     var ringtonePlayer: AVAudioPlayer?
     var ringtonePlaybackCallback: (() -> ())?
     
+    //var apiCallTimer: Timer!
+    
     // Font Name
     let fontName = "Garamond-Roman"    
     
@@ -83,10 +85,10 @@ class ViewController: UIViewController, PKPushRegistryDelegate, AVAudioPlayerDel
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         NSLog("viewDidLoad")
-        appDelegate.delegate = self
+        //appDelegate.delegate = self
         initialUI()
-        // Delay execution of my block for 2 seconds.
-        let delayTime = DispatchTime.now() + 2 // change 5 to desired number of seconds
+        // Delay execution of my block for 1 seconds.
+        let delayTime = DispatchTime.now() + 1 // change 5 to desired number of seconds
         DispatchQueue.main.asyncAfter(deadline: delayTime) {
             self.getUserIdentity()
         }
@@ -103,7 +105,10 @@ class ViewController: UIViewController, PKPushRegistryDelegate, AVAudioPlayerDel
     
     // MARK: - Custom Method
     func getUserIdentity() {
-        NSLog("Twilio Token : %@", SyncManager.shared.generateToken()!);
+        guard let accessToken = SyncManager.shared.generateToken() else {
+            return
+        }
+        NSLog("Twilio Token : %@", accessToken);
         setRoomIdentity()
     }
     
@@ -206,6 +211,39 @@ class ViewController: UIViewController, PKPushRegistryDelegate, AVAudioPlayerDel
             self.lblRestaurantTopConstraint.constant = 30
             self.lblRestaurant.text = "Anruf"
             self.lblRestaurantSub.text = "beendet"
+            self.viewRestaurant.isHidden = false
+            self.viewCalling.isHidden = true
+            break
+            
+        default:
+            break
+        }
+        
+        // Delay execution of my block for 2 seconds.
+        let delayTime = DispatchTime.now() + 2 // change 2 to desired number of seconds
+        DispatchQueue.main.asyncAfter(deadline: delayTime) {
+            self.initialUI()
+        }
+    }
+    
+    func callBusyUI() {
+        NSLog("callBusyUI")
+        FIRAnalytics.logEvent(withName: "callBusyUI", parameters: ["BusyUI" : "Busy UI" as NSObject])
+        toggleButtonState(isEnabled: false)
+        self.lblRoomNo.isHidden = false
+        switch callerType {
+        case .reception, .other:
+            self.lblReceptionTopConstraint.constant = 30
+            self.lblReception.text = "Benutzer"
+            self.lblReceptionSub.text = "beschäftigt"
+            self.viewRestaurant.isHidden = true
+            self.viewCalling.isHidden = true
+            break
+            
+        case .restaurant:
+            self.lblRestaurantTopConstraint.constant = 30
+            self.lblRestaurant.text = "Benutzer"
+            self.lblRestaurantSub.text = "beschäftigt"
             self.viewRestaurant.isHidden = false
             self.viewCalling.isHidden = true
             break
@@ -377,6 +415,9 @@ class ViewController: UIViewController, PKPushRegistryDelegate, AVAudioPlayerDel
                 // ON MAINTHREAD
                 self.call?.disconnect()
             })
+            //
+            //apiCallTimer.invalidate()
+            //
             toggleButtonState(isEnabled: false)
         }
 /*        else if (self.callInvite != nil) {
@@ -477,6 +518,36 @@ class ViewController: UIViewController, PKPushRegistryDelegate, AVAudioPlayerDel
         else if (callInvite.state == .canceled) {
             handleCallInviteCanceled(callInvite)
         }
+        localNotification()
+    }
+    
+    func localNotification() {
+        if #available(iOS 10.0, *) {
+            let content = UNMutableNotificationContent()
+            content.title = ""
+            content.body = ""
+            content.sound = UNNotificationSound.default()
+            content.badge = 0;
+            
+            // Deliver the notification in one seconds.
+            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 0.5, repeats: false)
+            
+            let request = UNNotificationRequest(identifier: "Test", content: content, trigger: trigger)
+            // 3. schedule localNotification
+            let center = UNUserNotificationCenter.current()
+            center.add(request, withCompletionHandler: { (error) in
+                if error == nil{
+                    NSLog("add NotificationRequest succeeded!")
+                }
+            })
+        }
+        else {
+            // Fallback on earlier versions
+            let notification = UILocalNotification()
+            notification.alertBody = ""
+            notification.applicationIconBadgeNumber = 0
+            UIApplication.shared.presentLocalNotificationNow(notification)
+        }
     }
     
     func handleCallInviteReceived(_ callInvite: TVOCallInvite) {
@@ -572,9 +643,7 @@ class ViewController: UIViewController, PKPushRegistryDelegate, AVAudioPlayerDel
         initialUI()
     }
     
-    // MARK: TVOCallDelegate
-    
-    
+    // MARK:- TVOCallDelegate
     func callDidConnect(_ call: TVOCall) {
         NSLog("callDidConnect:")
         FIRAnalytics.logEvent(withName: "callDidConnect", parameters: ["CallDidConnect" : "\(call.debugDescription)" as NSObject])
@@ -582,6 +651,13 @@ class ViewController: UIViewController, PKPushRegistryDelegate, AVAudioPlayerDel
         
         toggleButtonState(isEnabled: true)
         routeAudioToSpeaker()
+        //
+        //apiCallTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(checkCallingStatus), userInfo: nil, repeats: true)
+        //DispatchQueue.main.async(execute: {
+            //self.checkCallingStatus()
+        self.performSelector(inBackground: #selector(callAPIInBackGround), with: nil)
+        //})
+        //
     }
     
     //func callDidDisconnect(_ call: TVOCall) {
@@ -591,7 +667,9 @@ class ViewController: UIViewController, PKPushRegistryDelegate, AVAudioPlayerDel
         
         self.call = nil
         self.callInvite = nil
-        
+        //
+        //apiCallTimer.invalidate()
+        //
         callEndedUI()
     }
     
@@ -602,8 +680,79 @@ class ViewController: UIViewController, PKPushRegistryDelegate, AVAudioPlayerDel
         
         self.call = nil
         self.callInvite = nil
-        
+        //
+        //apiCallTimer.invalidate()
+        //
         initialUI()
+    }
+    
+    // MARK:- Api Call
+    func callAPIInBackGround() {
+        checkCallingStatus()
+    }
+    
+    func connectInMainThread() {
+        callConnectedUI()
+    }
+    
+    func busyInMainThread() {
+        callBusyUI()
+    }
+    
+    func checkCallingStatus() {
+        var urlString = String(format:"\(baseURLString)\(callingStatus)")
+        urlString += String(format:"?from=\(User_1.replacingOccurrences(of: "+", with: ""))")
+        do {
+            if let url = URL(string: urlString),
+                let data = try? Data(contentsOf: url),
+                let result = try JSONSerialization.jsonObject(with: data, options: []) as? [String: AnyObject] {
+                guard let statusResult = result["status"] as? String else {
+                    return
+                }
+                NSLog("callingStatus %@", statusResult)
+                switch statusResult {
+                case "queued":
+                    NSLog("callingStatus queued")
+                    
+                case "ringing":
+                    NSLog("callingStatus ringing")
+                    self.performSelector(inBackground: #selector(callAPIInBackGround), with: nil)
+                    //checkCallingStatus()
+                    
+                case "in-progress":
+                    NSLog("callingStatus in-progress")
+                    self.performSelector(onMainThread: #selector(connectInMainThread), with: nil, waitUntilDone: false)
+                    
+                case "completed":
+                    NSLog("callingStatus completed")
+                    //apiCallTimer.invalidate()
+                    
+                case "busy":
+                    NSLog("callingStatus busy")
+                    self.performSelector(onMainThread: #selector(busyInMainThread), with: nil, waitUntilDone: false)
+                    
+                case "failed":
+                    NSLog("callingStatus failed")
+                    //apiCallTimer.invalidate()
+                    
+                case "no-answer":
+                    NSLog("callingStatus no-answer")
+                    //apiCallTimer.invalidate()
+                    
+                case "canceled":
+                    NSLog("callingStatus canceled")
+                    //apiCallTimer.invalidate()
+                    
+                default:
+                    NSLog("callingStatus blank")
+                }
+            }
+        }
+        catch {
+            NSLog("Error obtaining callingStatus: %@", error.localizedDescription)
+            //checkCallingStatus()
+            self.performSelector(inBackground: #selector(callAPIInBackGround), with: nil)
+        }
     }
     
     // MARK: - AVAudioSession
