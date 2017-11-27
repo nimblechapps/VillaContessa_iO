@@ -64,6 +64,8 @@ class ViewController: UIViewController, PKPushRegistryDelegate, AVAudioPlayerDel
     var ringtonePlayer: AVAudioPlayer?
     var ringtonePlaybackCallback: (() -> ())?
     
+    var isAPICall = false;
+    
     //var apiCallTimer: Timer!
     
     // Font Name
@@ -301,8 +303,6 @@ class ViewController: UIViewController, PKPushRegistryDelegate, AVAudioPlayerDel
         
         self.viewRestaurant.isHidden = true
         self.viewCalling.isHidden = false
-        
-        //setRoomIdentity()
     }
     
     func showRestaurantCall(isOut: Bool) {
@@ -339,8 +339,6 @@ class ViewController: UIViewController, PKPushRegistryDelegate, AVAudioPlayerDel
         self.lblRestaurantSub.font = UIFont(name: fontName, size: 28.0)
         
         self.viewCalling.isHidden = false
-        
-        //setRoomIdentity()
     }
     
     // MARK: - IBAction Method
@@ -461,10 +459,7 @@ class ViewController: UIViewController, PKPushRegistryDelegate, AVAudioPlayerDel
         guard let accessToken = SyncManager.shared.generateToken() else {
             return
         }
-
-        //setRoomIdentity()
         
-        FIRAnalytics.logEvent(withName: "pushRegistrydidUpdate", parameters: ["PushRegistrydidUpdate" : "\(accessToken)" as NSObject])
         TwilioVoice.register(withAccessToken: accessToken, deviceToken: deviceToken) { (error) in
             if (error != nil) {
                 NSLog("An error occurred while registering: %@",String(describing: error?.localizedDescription))
@@ -473,6 +468,8 @@ class ViewController: UIViewController, PKPushRegistryDelegate, AVAudioPlayerDel
                 NSLog("Successfully registered for VoIP push notifications.")
             }
         }
+        
+        FIRAnalytics.logEvent(withName: "pushRegistrydidUpdate", parameters: ["PushRegistrydidUpdate" : "\(accessToken)" as NSObject])
         
         self.deviceTokenString = deviceToken
     }
@@ -488,7 +485,6 @@ class ViewController: UIViewController, PKPushRegistryDelegate, AVAudioPlayerDel
             return
         }
         
-        FIRAnalytics.logEvent(withName: "pushRegistrydidInvalidatePushTokenForType", parameters: ["PushRegistryDidInvalidatePushTokenForType" : "\(accessToken)" as NSObject])
         TwilioVoice.unregister(withAccessToken: accessToken, deviceToken: deviceToken) { (error) in
             if (error != nil) {
                 NSLog("An error occurred while unregistering: %@",String(describing: error?.localizedDescription))
@@ -498,16 +494,19 @@ class ViewController: UIViewController, PKPushRegistryDelegate, AVAudioPlayerDel
             }
         }
         
+        FIRAnalytics.logEvent(withName: "pushRegistrydidInvalidatePushTokenForType", parameters: ["PushRegistryDidInvalidatePushTokenForType" : "\(accessToken)" as NSObject])
+        
         self.deviceTokenString = nil
     }
     
     func pushRegistry(_ registry: PKPushRegistry, didReceiveIncomingPushWith payload: PKPushPayload, forType type: PKPushType) {
         NSLog("pushRegistry:didReceiveIncomingPushWithPayload:forType:")
         
-        FIRAnalytics.logEvent(withName: "pushRegistrydidReceiveIncomingPushWith", parameters: ["PushRegistryDidReceiveIncomingPushWith" : "\(payload.dictionaryPayload)" as NSObject])
         if (type == .voIP) {
             TwilioVoice.handleNotification(payload.dictionaryPayload, delegate: self)
         }
+        
+        FIRAnalytics.logEvent(withName: "pushRegistrydidReceiveIncomingPushWith", parameters: ["PushRegistryDidReceiveIncomingPushWith" : "\(payload.dictionaryPayload)" as NSObject])
     }
     
     // MARK: - TVONotificationDelegate
@@ -655,6 +654,7 @@ class ViewController: UIViewController, PKPushRegistryDelegate, AVAudioPlayerDel
         //apiCallTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(checkCallingStatus), userInfo: nil, repeats: true)
         //DispatchQueue.main.async(execute: {
             //self.checkCallingStatus()
+        isAPICall = true
         self.performSelector(inBackground: #selector(callAPIInBackGround), with: nil)
         //})
         //
@@ -662,11 +662,12 @@ class ViewController: UIViewController, PKPushRegistryDelegate, AVAudioPlayerDel
     
     //func callDidDisconnect(_ call: TVOCall) {
     func call(_ call: TVOCall, didDisconnectWithError error: Error?) {
-        NSLog("callDidDisconnect:")
-        FIRAnalytics.logEvent(withName: "callDidDisconnect", parameters: ["CallDidDisconnect" : "\(call.debugDescription)" as NSObject])
+        NSLog("didDisconnectWithError:")
+        FIRAnalytics.logEvent(withName: "DisconnectWithError", parameters: ["DisconnectWithError" : "\(call.debugDescription)" as NSObject])
         
         self.call = nil
         self.callInvite = nil
+        isAPICall = false
         //
         //apiCallTimer.invalidate()
         //
@@ -680,10 +681,24 @@ class ViewController: UIViewController, PKPushRegistryDelegate, AVAudioPlayerDel
         
         self.call = nil
         self.callInvite = nil
+        isAPICall = false
         //
         //apiCallTimer.invalidate()
         //
         initialUI()
+    }
+    
+    func callDidDisconnect(_ call: TVOCall) {
+        NSLog("callDidDisconnect:")
+        FIRAnalytics.logEvent(withName: "callDidDisconnect", parameters: ["callDidDisconnect" : "\(call.debugDescription)" as NSObject])
+        
+        self.call = nil
+        self.callInvite = nil
+        isAPICall = false
+        //callEndedUI()
+        DispatchQueue.main.async {
+            self.callEndedUI()
+        }
     }
     
     // MARK:- Api Call
@@ -716,11 +731,11 @@ class ViewController: UIViewController, PKPushRegistryDelegate, AVAudioPlayerDel
                     
                 case "ringing":
                     NSLog("callingStatus ringing")
-                    self.performSelector(inBackground: #selector(callAPIInBackGround), with: nil)
-                    //checkCallingStatus()
+                    //self.performSelector(inBackground: #selector(callAPIInBackGround), with: nil)
                     
                 case "in-progress":
                     NSLog("callingStatus in-progress")
+                    isAPICall = false
                     self.performSelector(onMainThread: #selector(connectInMainThread), with: nil, waitUntilDone: false)
                     
                 case "completed":
@@ -746,12 +761,17 @@ class ViewController: UIViewController, PKPushRegistryDelegate, AVAudioPlayerDel
                 default:
                     NSLog("callingStatus blank")
                 }
+                
+                if isAPICall {
+                    self.performSelector(inBackground: #selector(callAPIInBackGround), with: nil)
+                }
             }
         }
         catch {
             NSLog("Error obtaining callingStatus: %@", error.localizedDescription)
-            //checkCallingStatus()
-            self.performSelector(inBackground: #selector(callAPIInBackGround), with: nil)
+            if isAPICall {
+                self.performSelector(inBackground: #selector(callAPIInBackGround), with: nil)
+            }
         }
     }
     

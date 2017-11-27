@@ -83,7 +83,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
         NSLog("Device token for push notifications: FAIL")
-        print(error.localizedDescription)
+        NSLog("didFailToRegisterForRemoteNotificationsWithError %@", error.localizedDescription)
     }
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any]) {
@@ -104,8 +104,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     
     @available(iOS 10.0, *)
     func userNotificationCenter(_ center: UNUserNotificationCenter,  willPresent notification: UNNotification, withCompletionHandler   completionHandler: @escaping (_ options:   UNNotificationPresentationOptions) -> Void) {
-        print("Handle push from foreground")
-        print("\(notification.request.content.userInfo)")
+        NSLog("Handle push from foreground")
+        NSLog("willPresent notification %@", notification.request.content.userInfo)
         /*if notification.request.content.body == "inprogress" {
             self.delegate.UpdateUI()
             //UIAlertController().alertControllerWithTitle(notification.request.content.body, message: "", okButtonTitle: "OK", okBlockHandler: {
@@ -115,8 +115,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     
     @available(iOS 10.0, *)
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-        print("Handle push from background or closed")
-        print("\(response.notification.request.content.userInfo)")
+        NSLog("Handle push from background or closed")
+        NSLog("didReceive response %@", response.notification.request.content.userInfo)
         /*if response.notification.request.content.body == "inprogress" {
             self.delegate.UpdateUI()
             //UIAlertController().alertControllerWithTitle(response.notification.request.content.body, message: "", okButtonTitle: "OK", okBlockHandler: {
