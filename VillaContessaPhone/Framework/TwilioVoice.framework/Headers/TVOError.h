@@ -26,13 +26,14 @@ typedef NS_ENUM (NSInteger, TVOError) {
     TVOErrorExpirationTimeExceedsMaxTimeAllowed = 20157,    ///< Expiration Time Exceeds Maximum Time Allowed
     TVOErrorAccessForbidden                     = 20403,    ///< The account lacks permission to access the Twilio API
     TVOErrorApplicationNotFound                 = 21218,    ///< Invalid Application Sid
-    TVOErrorGenericError                        = 31000,    ///< Generic error
     TVOErrorConnectionTimeout                   = 31003,    ///< Connection timeout
     TVOErrorInitializationError                 = 31004,    ///< Initialization error
+    TVOErrorConnectionError                     = 31005,    ///< Connection error
     TVOErrorMalformedRequest                    = 31100,    ///< Malformed request
     TVOErrorInvalidData                         = 31106,    ///< Invalid data
     TVOErrorAuthorizationError                  = 31201,    ///< Authorization error
-    TVOErrorInvalidJWTToken                     = 31204,    ///< Invalid JWT token.
+    TVOErrorInvalidJWTToken                     = 31204,    ///< Invalid JWT token
+    TVOErrorMicrophoneAccessDenial              = 31208,    ///< User denied access to microphone
     TVOErrorRegistrationError                   = 31301     ///< Registration error
 };
 

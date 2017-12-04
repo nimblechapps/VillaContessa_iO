@@ -65,9 +65,11 @@ typedef NS_ENUM(NSUInteger, TVOCallInviteState) {
  *
  * @param delegate The `<TVOCallDelegate>` object that will receive call state updates.
  *
+ * @return A `TVOCall` object.
+ *
  * @see TVOCallDelegate
  */
-- (nullable TVOCall *)acceptWithDelegate:(nonnull id<TVOCallDelegate>)delegate;
+- (nonnull TVOCall *)acceptWithDelegate:(nonnull id<TVOCallDelegate>)delegate;
 
 /**
  * @brief Rejects the incoming call invite.

@@ -125,9 +125,9 @@ typedef NS_ENUM(NSUInteger, TVOLogModule) {
  * @see TVOCall
  * @see TVOCallDelegate
  */
-+ (nullable TVOCall *)call:(nonnull NSString *)accessToken
-                    params:(nullable NSDictionary <NSString *, NSString *> *)twiMLParams
-                  delegate:(nonnull id<TVOCallDelegate>)delegate;
++ (nonnull TVOCall *)call:(nonnull NSString *)accessToken
+                   params:(nullable NSDictionary <NSString *, NSString *> *)twiMLParams
+                 delegate:(nonnull id<TVOCallDelegate>)delegate;
 
 
 - (null_unspecified instancetype)init __attribute__((unavailable("TwilioVoice cannot be instantiated directly.")));
@@ -139,6 +139,24 @@ typedef NS_ENUM(NSUInteger, TVOLogModule) {
  * CallKit Audio Session Handling
  */
 @interface TwilioVoice (CallKitIntegration)
+
+/**
+ * @brief Makes an outgoing call.
+ *
+ * @param accessToken Twilio Access Token.
+ * @param twiMLParams Additional parameters to be passed to the TwiML application.
+ * @param uuid An `NSUUID` used to uniquely identify this Call and suitable for sharing with `CXCallController`.
+ * @param delegate A `<TVOCallDelegate>` to receive call state updates.
+ *
+ * @return A `<TVOCall>` object.
+ *
+ * @see TVOCall
+ * @see TVOCallDelegate
+ */
++ (nonnull TVOCall *)call:(nonnull NSString *)accessToken
+                   params:(nullable NSDictionary <NSString *, NSString *> *)twiMLParams
+                     uuid:(nonnull NSUUID *)uuid
+                 delegate:(nonnull id<TVOCallDelegate>)delegate;
 
 /**
  * @brief Configures, but does not activate the `AVAudioSession`.

@@ -73,6 +73,15 @@ typedef NS_ENUM(NSUInteger, TVOCallState) {
  */
 @property (nonatomic, assign, readonly) TVOCallState state;
 
+/**
+ * @brief Property that defines if the call is on hold.
+ *
+ * @discussion Holding a Call ceases the flow of audio between parties. This operation is performed
+ * automatically in response to an AVAudioSession interruption. Setting the property will only take
+ * effect if the `<state>` is `TVOCallConnected`.
+ */
+@property (nonatomic, getter=isOnHold) BOOL onHold;
+
 
 /**
  * @name General Call Actions
@@ -111,8 +120,10 @@ typedef NS_ENUM(NSUInteger, TVOCallState) {
 /**
  * @brief UUID of the call.
  *
- * @discussion Use this UUID for CallKit methods.
+ * @discussion Use this UUID to identify the `TVOCall` when working with CallKit.
+ * You can provide a UUID for outgoing calls using `[TwilioVoice call:params:uuid:delegate]`.
+ * Calls created via `[TVOCallInvite acceptWithDelegate:]` inherit their `uuid` from the Invite itself.
  */
-@property (nonatomic, strong, nullable) NSUUID *uuid;
+@property (nonatomic, strong, readonly, nonnull) NSUUID *uuid;
 
 @end
