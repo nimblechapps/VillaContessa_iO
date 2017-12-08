@@ -38,20 +38,20 @@
                                         </constraints>
                                     </imageView>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.5" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="phoneCircle" translatesAutoresizingMaskIntoConstraints="NO" id="CS7-Ka-8Oc">
-                                        <rect key="frame" x="64.5" y="198.5" width="38" height="38"/>
+                                        <rect key="frame" x="65" y="198.5" width="38" height="38"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="CS7-Ka-8Oc" secondAttribute="height" multiplier="1:1" id="WL2-cQ-PJ0"/>
                                             <constraint firstAttribute="height" constant="38" id="Xra-pA-aqO"/>
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rezeption" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WFo-Ob-cTu">
-                                        <rect key="frame" x="102.5" y="205" width="126" height="33"/>
+                                        <rect key="frame" x="103" y="205" width="126" height="33"/>
                                         <fontDescription key="fontDescription" name="Garamond-Roman" family="Garamond" pointSize="28"/>
                                         <color key="textColor" red="0.58039215686274503" green="0.50196078431372548" blue="0.30588235294117649" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="anrufen" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cf0-lP-OLt">
-                                        <rect key="frame" x="124" y="244" width="81" height="28"/>
+                                        <rect key="frame" x="125" y="244" width="81" height="28"/>
                                         <fontDescription key="fontDescription" name="Garamond-Roman" family="Garamond" pointSize="24"/>
                                         <color key="textColor" red="0.58039215686274503" green="0.50196078431372548" blue="0.30588235294117649" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -159,16 +159,16 @@
                                         </constraints>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" alpha="0.5" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="phoneCircle" translatesAutoresizingMaskIntoConstraints="NO" id="Nhj-5c-LiY">
-                                        <rect key="frame" x="63.5" y="177.5" width="38" height="38"/>
+                                        <rect key="frame" x="64" y="177.5" width="38" height="38"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Restauran" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RG3-aP-eo3">
-                                        <rect key="frame" x="101.5" y="184" width="128" height="33"/>
+                                        <rect key="frame" x="102" y="184" width="128" height="33"/>
                                         <fontDescription key="fontDescription" name="Garamond-Roman" family="Garamond" pointSize="28"/>
                                         <color key="textColor" red="0.58039215686274503" green="0.50196078431372548" blue="0.30588235294117649" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="anrufen" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IpB-hD-Lkq">
-                                        <rect key="frame" x="124" y="223" width="81" height="28"/>
+                                        <rect key="frame" x="125" y="223" width="81" height="28"/>
                                         <fontDescription key="fontDescription" name="Garamond-Roman" family="Garamond" pointSize="24"/>
                                         <color key="textColor" red="0.58039215686274503" green="0.50196078431372548" blue="0.30588235294117649" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>

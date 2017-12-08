@@ -16,10 +16,10 @@ class SyncManager: NSObject {
     var identity : String?
     
     func generateToken() -> String? {
-        if !ApplicationData.shared.isReachable {
-            return nil
-        }
-        
+        //if !ApplicationData.shared.isReachable {
+            //return nil
+        //}
+    
         var urlString = String(format:"\(baseURLString)\(accessTokenEndpoint)")
         urlString += String(format:"?id=\(User_1)")
         
@@ -35,6 +35,7 @@ class SyncManager: NSObject {
         }
         catch {
             NSLog("Error obtaining Twilio token: %@",error.localizedDescription)
+            return nil
         }
         NSLog("Twilio Token: %@",String(describing: token))
         FIRAnalytics.logEvent(withName: "generateToken", parameters: ["generateToken" : token! as NSObject])

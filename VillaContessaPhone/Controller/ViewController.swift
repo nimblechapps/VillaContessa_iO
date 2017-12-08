@@ -110,7 +110,7 @@ class ViewController: UIViewController, PKPushRegistryDelegate, AVAudioPlayerDel
         guard let accessToken = SyncManager.shared.generateToken() else {
             return
         }
-        NSLog("Twilio Token : %@", accessToken);
+        NSLog("getUserIdentity Twilio Token :%@", accessToken);
         setRoomIdentity()
     }
     
@@ -143,7 +143,8 @@ class ViewController: UIViewController, PKPushRegistryDelegate, AVAudioPlayerDel
         self.lblRestaurantCenterConstraint.constant = 5
         
         self.viewCalling.isHidden = true
-        self.dotLoaderCalling.isHidden = false
+        self.dotLoaderCalling.isHidden = true
+        self.dotLoaderCalling.stopAnimating()
         self.btnAccept.isHidden = true
         self.btnHangUp.isHidden = false
         self.lblCalling.text = "Auflegen"
@@ -174,6 +175,7 @@ class ViewController: UIViewController, PKPushRegistryDelegate, AVAudioPlayerDel
         NSLog("callConnectedUI")
         FIRAnalytics.logEvent(withName: "callConnectedUI", parameters: ["ConnectedUI" : "Connected UI" as NSObject])
         self.dotLoaderCalling.isHidden = true
+        self.dotLoaderCalling.stopAnimating()
         switch callerType {
         case .reception:
             self.lblReception.text = "Rezeption"
@@ -277,6 +279,7 @@ class ViewController: UIViewController, PKPushRegistryDelegate, AVAudioPlayerDel
         
         self.btnReception.isEnabled = false
         self.imagePhoneReception.isHidden = true
+        self.dotLoaderCalling.isHidden = false
         self.dotLoaderCalling.startAnimating()
         
         if isOut {
@@ -312,6 +315,7 @@ class ViewController: UIViewController, PKPushRegistryDelegate, AVAudioPlayerDel
         
         self.btnRestaurant.isEnabled = false
         self.imagePhoneRestaurant.isHidden = true
+        self.dotLoaderCalling.isHidden = false
         self.dotLoaderCalling.startAnimating()
         
         if isOut {
@@ -366,8 +370,9 @@ class ViewController: UIViewController, PKPushRegistryDelegate, AVAudioPlayerDel
                 return
             }
             else {
-                showReceptionCall(isOut: true)
-            
+                DispatchQueue.main.async(execute: {
+                    self.showReceptionCall(isOut: true)
+                })
             }
             NSLog("restaurantButtonTapped: %@ To %@",User_1, Reception)
             FIRAnalytics.logEvent(withName: "receptionCall", parameters: ["ReceptionCallData" : "\(call.debugDescription)" as NSObject])
@@ -398,7 +403,9 @@ class ViewController: UIViewController, PKPushRegistryDelegate, AVAudioPlayerDel
                 return
             }
             else {
-                showRestaurantCall(isOut: true)
+                DispatchQueue.main.async(execute: {
+                    self.showRestaurantCall(isOut: true)
+                })
             }
             NSLog("restaurantButtonTapped: %@ To %@",User_1, Restaurant)
             FIRAnalytics.logEvent(withName: "restaurantCall", parameters: ["RestaurantCallData" : "\(call.debugDescription)" as NSObject])
@@ -407,8 +414,8 @@ class ViewController: UIViewController, PKPushRegistryDelegate, AVAudioPlayerDel
     
     @IBAction func hangUpButtonTapped(_ sender: UIButton) {
         if (self.call != nil) {
-            NSLog("outGoingCallhangUpTapped")
-            FIRAnalytics.logEvent(withName: "outGoingCallTapped", parameters: ["OutGoingCallEnd" : "\(call.debugDescription)" as NSObject])
+            NSLog("hangUpButtonTapped")
+            FIRAnalytics.logEvent(withName: "hangUpButtonTapped", parameters: ["HangUpButtonTapped" : "\(call.debugDescription)" as NSObject])
             DispatchQueue.main.async(execute: {
                 // ON MAINTHREAD
                 self.call?.disconnect()
@@ -568,15 +575,21 @@ class ViewController: UIViewController, PKPushRegistryDelegate, AVAudioPlayerDel
         NSLog("callInviteReceived %@",callInvite.from)
         FIRAnalytics.logEvent(withName: "callInviteReceived", parameters: ["CallInviteReceived" : "\(callInvite.from)" as NSObject])
         if !from.isEmpty && from == Reception {
-            showReceptionCall(isOut: false)
+            DispatchQueue.main.async(execute: {
+                self.showReceptionCall(isOut: false)
+            })
         }
             
         else if !from.isEmpty && from == Restaurant {
-            showRestaurantCall(isOut: false)
+            DispatchQueue.main.async(execute: {
+                self.showRestaurantCall(isOut: false)
+            })
         }
-            
+        
         else {
-            showReceptionCall(isOut: false)
+            DispatchQueue.main.async(execute: {
+                self.showReceptionCall(isOut: false)
+            })
             callerType = .other
             self.lblReception.text = "Unbekannte Nummer"
         }
@@ -633,13 +646,17 @@ class ViewController: UIViewController, PKPushRegistryDelegate, AVAudioPlayerDel
             UIApplication.shared.cancelAllLocalNotifications()
         }
         
-        callEndedUI()
+        DispatchQueue.main.async(execute: {
+            self.callEndedUI()
+        })
     }
     
     func notificationError(_ error: Error) {
         NSLog("notificationError: %@",error.localizedDescription)
         FIRAnalytics.logEvent(withName: "notificationError", parameters: ["NotificationError" : "\(error.localizedDescription)" as NSObject])
-        initialUI()
+        DispatchQueue.main.async(execute: {
+            self.initialUI()
+        })
     }
     
     // MARK:- TVOCallDelegate
@@ -671,7 +688,9 @@ class ViewController: UIViewController, PKPushRegistryDelegate, AVAudioPlayerDel
         //
         //apiCallTimer.invalidate()
         //
-        callEndedUI()
+        DispatchQueue.main.async(execute: {
+            self.callEndedUI()
+        })
     }
     
     //func call(_ call: TVOCall, didFailWithError error: Error) {
@@ -685,7 +704,9 @@ class ViewController: UIViewController, PKPushRegistryDelegate, AVAudioPlayerDel
         //
         //apiCallTimer.invalidate()
         //
-        initialUI()
+        DispatchQueue.main.async(execute: {
+            self.initialUI()
+        })
     }
     
     func callDidDisconnect(_ call: TVOCall) {
@@ -696,9 +717,9 @@ class ViewController: UIViewController, PKPushRegistryDelegate, AVAudioPlayerDel
         self.callInvite = nil
         isAPICall = false
         //callEndedUI()
-        DispatchQueue.main.async {
+        DispatchQueue.main.async(execute: {
             self.callEndedUI()
-        }
+        })
     }
     
     // MARK:- Api Call
@@ -871,7 +892,9 @@ class ViewController: UIViewController, PKPushRegistryDelegate, AVAudioPlayerDel
 // MARK: - ViewController: UpdateUIDelegate
 extension ViewController: UpdateUIDelegate {
     func UpdateUI() {
-        callConnectedUI()
+        DispatchQueue.main.async(execute: {
+            self.callConnectedUI()
+        })
     }
 }
 

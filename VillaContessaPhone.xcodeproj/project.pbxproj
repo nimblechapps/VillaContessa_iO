@@ -496,7 +496,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "VillaContessaPhone/Villa Contessa Phone.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Nimble Chapps (69239AZER7)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 69239AZER7;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -509,10 +509,10 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "";
 				OTHER_LDFLAGS = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = com.nimblechapps.twiliocall;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nimblechapps.villacontessa;
 				PRODUCT_NAME = "Villa Contessa Phone";
-				PROVISIONING_PROFILE = "db2322d8-606d-4c00-8184-418e66127f5c";
-				PROVISIONING_PROFILE_SPECIFIER = TwilioCallAdhocPush;
+				PROVISIONING_PROFILE = "2029d4f1-2281-47f9-80de-6bff7ea10590";
+				PROVISIONING_PROFILE_SPECIFIER = VillaContessaDev;
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -525,7 +525,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "VillaContessaPhone/Villa Contessa Phone.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Nimble Chapps (69239AZER7)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 69239AZER7;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -538,10 +538,10 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "";
 				OTHER_LDFLAGS = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = com.nimblechapps.twiliocall;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nimblechapps.villacontessa;
 				PRODUCT_NAME = "Villa Contessa Phone";
-				PROVISIONING_PROFILE = "db2322d8-606d-4c00-8184-418e66127f5c";
-				PROVISIONING_PROFILE_SPECIFIER = TwilioCallAdhocPush;
+				PROVISIONING_PROFILE = "2029d4f1-2281-47f9-80de-6bff7ea10590";
+				PROVISIONING_PROFILE_SPECIFIER = VillaContessaDev;
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
