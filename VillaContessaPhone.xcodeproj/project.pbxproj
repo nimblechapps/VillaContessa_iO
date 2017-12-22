@@ -27,6 +27,8 @@
 		68A7E3751E4ED63900F9D776 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 68A7E3741E4ED63900F9D776 /* Assets.xcassets */; };
 		68A7E3831E4ED68000F9D776 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68A7E3801E4ED68000F9D776 /* AppDelegate.swift */; };
 		68A7E3841E4ED68000F9D776 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68A7E3821E4ED68000F9D776 /* ViewController.swift */; };
+		68EE59AB1FDFFC1B00FF34D8 /* iOSDevCenters+GIF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68EE59AA1FDFFC1B00FF34D8 /* iOSDevCenters+GIF.swift */; };
+		68EE59AD1FDFFCF500FF34D8 /* loading.gif in Resources */ = {isa = PBXBuildFile; fileRef = 68EE59AC1FDFFCF500FF34D8 /* loading.gif */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -66,6 +68,8 @@
 		68A7E3801E4ED68000F9D776 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		68A7E3821E4ED68000F9D776 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		68B7BA331F2750CE007DD76F /* Villa Contessa Phone.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Villa Contessa Phone.entitlements"; sourceTree = "<group>"; };
+		68EE59AA1FDFFC1B00FF34D8 /* iOSDevCenters+GIF.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "iOSDevCenters+GIF.swift"; sourceTree = "<group>"; };
+		68EE59AC1FDFFCF500FF34D8 /* loading.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = loading.gif; sourceTree = "<group>"; };
 		C530F2290F523A6A7626A957 /* Pods-VillaContessaPhone.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VillaContessaPhone.release.xcconfig"; path = "Pods/Target Support Files/Pods-VillaContessaPhone/Pods-VillaContessaPhone.release.xcconfig"; sourceTree = "<group>"; };
 		E03EE2E6E3CC40B879469A69 /* Pods-VillaContessaPhone.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VillaContessaPhone.debug.xcconfig"; path = "Pods/Target Support Files/Pods-VillaContessaPhone/Pods-VillaContessaPhone.debug.xcconfig"; sourceTree = "<group>"; };
 		E8BB480E583DEEB9111591FB /* Pods_VillaContessaPhone.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VillaContessaPhone.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -127,6 +131,8 @@
 		686249F21E9205F000C10A49 /* Dependencies */ = {
 			isa = PBXGroup;
 			children = (
+				68EE59AC1FDFFCF500FF34D8 /* loading.gif */,
+				68EE59AA1FDFFC1B00FF34D8 /* iOSDevCenters+GIF.swift */,
 				68138B471F76137600CAAFC4 /* Reachability.swift */,
 				686249F31E9205F000C10A49 /* DotsLoader */,
 			);
@@ -299,6 +305,7 @@
 				688CF5011F0A22D300D39F6C /* Klingelton-altes-Telefon.mp3 in Resources */,
 				68187CD61E8E77B8008E5BA6 /* outgoing.wav in Resources */,
 				688264631EFD1DDA00E49986 /* Garamond Roman.ttf in Resources */,
+				68EE59AD1FDFFCF500FF34D8 /* loading.gif in Resources */,
 				68187CD51E8E77B8008E5BA6 /* incoming.wav in Resources */,
 				68A7E3751E4ED63900F9D776 /* Assets.xcassets in Resources */,
 			);
@@ -363,6 +370,7 @@
 				6849CB8E1E938A0100E79990 /* BasicAlertController.swift in Sources */,
 				68A7E3831E4ED68000F9D776 /* AppDelegate.swift in Sources */,
 				68187CCB1E8E36CE008E5BA6 /* ApplicationData.swift in Sources */,
+				68EE59AB1FDFFC1B00FF34D8 /* iOSDevCenters+GIF.swift in Sources */,
 				68584E211FAAD00000D3C3AF /* SyncManager.swift in Sources */,
 				68187CCD1E8E3723008E5BA6 /* AppConstant.swift in Sources */,
 				68138B481F76137600CAAFC4 /* Reachability.swift in Sources */,

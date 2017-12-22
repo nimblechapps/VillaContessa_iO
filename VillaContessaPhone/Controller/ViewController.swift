@@ -48,6 +48,7 @@ class ViewController: UIViewController, PKPushRegistryDelegate, AVAudioPlayerDel
     // Display Accept/HangUp Call View
     @IBOutlet weak var viewCalling: UIView!
     @IBOutlet weak var dotLoaderCalling: DotsLoader!
+    @IBOutlet weak var imageLoading: UIImageView!
     @IBOutlet weak var btnAccept: UIButton!
     @IBOutlet weak var btnHangUp: UIButton!
     @IBOutlet weak var lblCalling: UILabel!
@@ -65,8 +66,6 @@ class ViewController: UIViewController, PKPushRegistryDelegate, AVAudioPlayerDel
     var ringtonePlaybackCallback: (() -> ())?
     
     var isAPICall = false;
-    
-    //var apiCallTimer: Timer!
     
     // Font Name
     let fontName = "Garamond-Roman"    
@@ -89,6 +88,8 @@ class ViewController: UIViewController, PKPushRegistryDelegate, AVAudioPlayerDel
         NSLog("viewDidLoad")
         //appDelegate.delegate = self
         initialUI()
+        let gifImage = UIImage.gifImageWithName("loading")
+        imageLoading.image = gifImage
         // Delay execution of my block for 1 seconds.
         let delayTime = DispatchTime.now() + 1 // change 5 to desired number of seconds
         DispatchQueue.main.asyncAfter(deadline: delayTime) {
@@ -143,8 +144,10 @@ class ViewController: UIViewController, PKPushRegistryDelegate, AVAudioPlayerDel
         self.lblRestaurantCenterConstraint.constant = 5
         
         self.viewCalling.isHidden = true
-        self.dotLoaderCalling.isHidden = true
-        self.dotLoaderCalling.stopAnimating()
+//        self.dotLoaderCalling.isHidden = true
+//        self.dotLoaderCalling.stopAnimating()
+        imageLoading.isHidden = true
+        
         self.btnAccept.isHidden = true
         self.btnHangUp.isHidden = false
         self.lblCalling.text = "Auflegen"
@@ -174,8 +177,9 @@ class ViewController: UIViewController, PKPushRegistryDelegate, AVAudioPlayerDel
     func callConnectedUI() {
         NSLog("callConnectedUI")
         FIRAnalytics.logEvent(withName: "callConnectedUI", parameters: ["ConnectedUI" : "Connected UI" as NSObject])
-        self.dotLoaderCalling.isHidden = true
-        self.dotLoaderCalling.stopAnimating()
+//        self.dotLoaderCalling.isHidden = true
+//        self.dotLoaderCalling.stopAnimating()
+        imageLoading.isHidden = true
         switch callerType {
         case .reception:
             self.lblReception.text = "Rezeption"
@@ -279,8 +283,10 @@ class ViewController: UIViewController, PKPushRegistryDelegate, AVAudioPlayerDel
         
         self.btnReception.isEnabled = false
         self.imagePhoneReception.isHidden = true
-        self.dotLoaderCalling.isHidden = false
-        self.dotLoaderCalling.startAnimating()
+        
+//        self.dotLoaderCalling.isHidden = false
+//        self.dotLoaderCalling.startAnimating()
+        imageLoading.isHidden = false
         
         if isOut {
             self.lblReception.text = "Rezeption"
@@ -315,8 +321,10 @@ class ViewController: UIViewController, PKPushRegistryDelegate, AVAudioPlayerDel
         
         self.btnRestaurant.isEnabled = false
         self.imagePhoneRestaurant.isHidden = true
-        self.dotLoaderCalling.isHidden = false
-        self.dotLoaderCalling.startAnimating()
+        
+//        self.dotLoaderCalling.isHidden = false
+//        self.dotLoaderCalling.startAnimating()
+        imageLoading.isHidden = false
         
         if isOut {
             self.lblRestaurant.text = "Restaurant"
@@ -420,9 +428,6 @@ class ViewController: UIViewController, PKPushRegistryDelegate, AVAudioPlayerDel
                 // ON MAINTHREAD
                 self.call?.disconnect()
             })
-            //
-            //apiCallTimer.invalidate()
-            //
             toggleButtonState(isEnabled: false)
         }
 /*        else if (self.callInvite != nil) {
@@ -589,9 +594,9 @@ class ViewController: UIViewController, PKPushRegistryDelegate, AVAudioPlayerDel
         else {
             DispatchQueue.main.async(execute: {
                 self.showReceptionCall(isOut: false)
+                self.callerType = .other
+                self.lblReception.text = "Unbekannte Nummer"
             })
-            callerType = .other
-            self.lblReception.text = "Unbekannte Nummer"
         }
         
         // If the application is not in the foreground, post a local notification
@@ -668,7 +673,6 @@ class ViewController: UIViewController, PKPushRegistryDelegate, AVAudioPlayerDel
         toggleButtonState(isEnabled: true)
         routeAudioToSpeaker()
         //
-        //apiCallTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(checkCallingStatus), userInfo: nil, repeats: true)
         //DispatchQueue.main.async(execute: {
             //self.checkCallingStatus()
         isAPICall = true
@@ -685,9 +689,7 @@ class ViewController: UIViewController, PKPushRegistryDelegate, AVAudioPlayerDel
         self.call = nil
         self.callInvite = nil
         isAPICall = false
-        //
-        //apiCallTimer.invalidate()
-        //
+
         DispatchQueue.main.async(execute: {
             self.callEndedUI()
         })
@@ -701,9 +703,7 @@ class ViewController: UIViewController, PKPushRegistryDelegate, AVAudioPlayerDel
         self.call = nil
         self.callInvite = nil
         isAPICall = false
-        //
-        //apiCallTimer.invalidate()
-        //
+
         DispatchQueue.main.async(execute: {
             self.initialUI()
         })
@@ -745,7 +745,6 @@ class ViewController: UIViewController, PKPushRegistryDelegate, AVAudioPlayerDel
                 guard let statusResult = result["status"] as? String else {
                     return
                 }
-                NSLog("callingStatus %@", statusResult)
                 switch statusResult {
                 case "queued":
                     NSLog("callingStatus queued")
@@ -761,26 +760,23 @@ class ViewController: UIViewController, PKPushRegistryDelegate, AVAudioPlayerDel
                     
                 case "completed":
                     NSLog("callingStatus completed")
-                    //apiCallTimer.invalidate()
-                    
+
                 case "busy":
                     NSLog("callingStatus busy")
+                    isAPICall = false
                     self.performSelector(onMainThread: #selector(busyInMainThread), with: nil, waitUntilDone: false)
                     
                 case "failed":
                     NSLog("callingStatus failed")
-                    //apiCallTimer.invalidate()
                     
                 case "no-answer":
                     NSLog("callingStatus no-answer")
-                    //apiCallTimer.invalidate()
                     
                 case "canceled":
                     NSLog("callingStatus canceled")
-                    //apiCallTimer.invalidate()
                     
                 default:
-                    NSLog("callingStatus blank")
+                    NSLog("callingStatus %@", statusResult)
                 }
                 
                 if isAPICall {
