@@ -50,22 +50,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         if #available(iOS 10.0, *) {
             UIApplication.shared.applicationIconBadgeNumber = 0
             UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
-//            let center = UNUserNotificationCenter.current()
-//            center.getNotificationSettings(completionHandler: { (settings) in
-//                if settings.authorizationStatus == .denied {
-//                    UIAlertController().alertControllerWithTitle("Not given Remote notification permission", message: "", okButtonTitle: "OK", okBlockHandler: {
-//                    }, viewController: self.window?.rootViewController)
-//                }
-//            })
+            //let center = UNUserNotificationCenter.current()
+            //center.getNotificationSettings(completionHandler: { (settings) in
+                //if settings.authorizationStatus == .denied {
+                    //UIAlertController().alertControllerWithTitle("Not given Remote notification permission", message: "", okButtonTitle: "OK", okBlockHandler: {
+                    //}, viewController: self.window?.rootViewController)
+                //}
+            //})
         }
         else {
             // Fallback on earlier versions
             UIApplication.shared.applicationIconBadgeNumber = 0
             UIApplication.shared.cancelAllLocalNotifications()
-//            if UIApplication.shared.isRegisteredForRemoteNotifications {
-//                UIAlertController().alertControllerWithTitle("Not given Remote notification permission", message: "", okButtonTitle: "OK", okBlockHandler: {
-//                }, viewController: self.window?.rootViewController)
-//            }
+            //if UIApplication.shared.isRegisteredForRemoteNotifications {
+                //UIAlertController().alertControllerWithTitle("Not given Remote notification permission", message: "", okButtonTitle: "OK", okBlockHandler: {
+                //}, viewController: self.window?.rootViewController)
+            //}
         }
     }
 
@@ -77,8 +77,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         let deviceTokenString = deviceToken.reduce("", {$0 + String(format: "%02X", $1)})
         NSLog("Remote Push Notification Token %@", deviceTokenString)
         registerToken(deviceTokenString)
-//        UIAlertController().alertControllerWithTitle(deviceTokenString, message: "", okButtonTitle: "OK", okBlockHandler: {
-//        }, viewController: self.window?.rootViewController)
+        //UIAlertController().alertControllerWithTitle(deviceTokenString, message: "", okButtonTitle: "OK", okBlockHandler: {
+        //}, viewController: self.window?.rootViewController)
     }
     
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {

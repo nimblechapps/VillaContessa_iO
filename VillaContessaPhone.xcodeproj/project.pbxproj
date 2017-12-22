@@ -62,7 +62,7 @@
 		686249F41E9205F000C10A49 /* DotsLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DotsLoader.swift; sourceTree = "<group>"; };
 		688264621EFD1DDA00E49986 /* Garamond Roman.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Garamond Roman.ttf"; sourceTree = "<group>"; };
 		688CF5001F0A22D300D39F6C /* Klingelton-altes-Telefon.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Klingelton-altes-Telefon.mp3"; sourceTree = "<group>"; };
-		68A7E36A1E4ED63900F9D776 /* Villa Contessa Phone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Villa Contessa Phone.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		68A7E36A1E4ED63900F9D776 /* Contessa Phone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Contessa Phone.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		68A7E3741E4ED63900F9D776 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		68A7E3791E4ED63900F9D776 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		68A7E3801E4ED68000F9D776 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -168,7 +168,7 @@
 		68A7E36B1E4ED63900F9D776 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				68A7E36A1E4ED63900F9D776 /* Villa Contessa Phone.app */,
+				68A7E36A1E4ED63900F9D776 /* Contessa Phone.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -247,7 +247,7 @@
 			);
 			name = VillaContessaPhone;
 			productName = TwilioVoiceCall;
-			productReference = 68A7E36A1E4ED63900F9D776 /* Villa Contessa Phone.app */;
+			productReference = 68A7E36A1E4ED63900F9D776 /* Contessa Phone.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -518,7 +518,7 @@
 				LIBRARY_SEARCH_PATHS = "";
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.nimblechapps.villacontessa;
-				PRODUCT_NAME = "Villa Contessa Phone";
+				PRODUCT_NAME = "Contessa Phone";
 				PROVISIONING_PROFILE = "2029d4f1-2281-47f9-80de-6bff7ea10590";
 				PROVISIONING_PROFILE_SPECIFIER = VillaContessaDev;
 				SWIFT_VERSION = 3.0;
@@ -547,7 +547,7 @@
 				LIBRARY_SEARCH_PATHS = "";
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.nimblechapps.villacontessa;
-				PRODUCT_NAME = "Villa Contessa Phone";
+				PRODUCT_NAME = "Contessa Phone";
 				PROVISIONING_PROFILE = "2029d4f1-2281-47f9-80de-6bff7ea10590";
 				PROVISIONING_PROFILE_SPECIFIER = VillaContessaDev;
 				SWIFT_VERSION = 3.0;

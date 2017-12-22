@@ -242,16 +242,16 @@ class ViewController: UIViewController, PKPushRegistryDelegate, AVAudioPlayerDel
         switch callerType {
         case .reception, .other:
             self.lblReceptionTopConstraint.constant = 30
-            self.lblReception.text = "Benutzer"
-            self.lblReceptionSub.text = "beschäftigt"
+            self.lblReception.text = "Leitung"
+            self.lblReceptionSub.text = "besetzt"
             self.viewRestaurant.isHidden = true
             self.viewCalling.isHidden = true
             break
             
         case .restaurant:
             self.lblRestaurantTopConstraint.constant = 30
-            self.lblRestaurant.text = "Benutzer"
-            self.lblRestaurantSub.text = "beschäftigt"
+            self.lblRestaurant.text = "Leitung"
+            self.lblRestaurantSub.text = "besetztalert"
             self.viewRestaurant.isHidden = false
             self.viewCalling.isHidden = true
             break
@@ -529,7 +529,7 @@ class ViewController: UIViewController, PKPushRegistryDelegate, AVAudioPlayerDel
         else if (callInvite.state == .canceled) {
             handleCallInviteCanceled(callInvite)
         }
-        localNotification()
+        //localNotification()
     }
     
     func localNotification() {
@@ -576,7 +576,9 @@ class ViewController: UIViewController, PKPushRegistryDelegate, AVAudioPlayerDel
         
         let from = callInvite.from
         
-        playIncomingRingtone()
+        //playIncomingRingtone()
+        self.performSelector(inBackground: #selector(playIncomingRingtone), with: nil)
+        
         NSLog("callInviteReceived %@",callInvite.from)
         FIRAnalytics.logEvent(withName: "callInviteReceived", parameters: ["CallInviteReceived" : "\(callInvite.from)" as NSObject])
         if !from.isEmpty && from == Reception {
