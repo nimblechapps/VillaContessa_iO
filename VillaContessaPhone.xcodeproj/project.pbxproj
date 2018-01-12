@@ -519,7 +519,7 @@
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.nimblechapps.villacontessa;
 				PRODUCT_NAME = "Contessa Phone";
-				PROVISIONING_PROFILE = "2029d4f1-2281-47f9-80de-6bff7ea10590";
+				PROVISIONING_PROFILE = "80c46349-4a01-4b07-af09-9ed3a0c8b9d5";
 				PROVISIONING_PROFILE_SPECIFIER = VillaContessaDev;
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -548,7 +548,7 @@
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.nimblechapps.villacontessa;
 				PRODUCT_NAME = "Contessa Phone";
-				PROVISIONING_PROFILE = "2029d4f1-2281-47f9-80de-6bff7ea10590";
+				PROVISIONING_PROFILE = "80c46349-4a01-4b07-af09-9ed3a0c8b9d5";
 				PROVISIONING_PROFILE_SPECIFIER = VillaContessaDev;
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;

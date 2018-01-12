@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "68A7E3691E4ED63900F9D776"
-               BuildableName = "Contessa Phone.app"
-               BlueprintName = "VillaContessaPhone"
-               ReferencedContainer = "container:VillaContessaPhone.xcodeproj">
+               BlueprintIdentifier = "4255B1FA6A1759B8622BFACF917D152D"
+               BuildableName = "Pods_VillaContessaPhone.framework"
+               BlueprintName = "Pods-VillaContessaPhone"
+               ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -29,15 +29,6 @@
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
       </Testables>
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "68A7E3691E4ED63900F9D776"
-            BuildableName = "Contessa Phone.app"
-            BlueprintName = "VillaContessaPhone"
-            ReferencedContainer = "container:VillaContessaPhone.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
@@ -51,16 +42,15 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "68A7E3691E4ED63900F9D776"
-            BuildableName = "Contessa Phone.app"
-            BlueprintName = "VillaContessaPhone"
-            ReferencedContainer = "container:VillaContessaPhone.xcodeproj">
+            BlueprintIdentifier = "4255B1FA6A1759B8622BFACF917D152D"
+            BuildableName = "Pods_VillaContessaPhone.framework"
+            BlueprintName = "Pods-VillaContessaPhone"
+            ReferencedContainer = "container:Pods.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -70,16 +60,15 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "68A7E3691E4ED63900F9D776"
-            BuildableName = "Contessa Phone.app"
-            BlueprintName = "VillaContessaPhone"
-            ReferencedContainer = "container:VillaContessaPhone.xcodeproj">
+            BlueprintIdentifier = "4255B1FA6A1759B8622BFACF917D152D"
+            BuildableName = "Pods_VillaContessaPhone.framework"
+            BlueprintName = "Pods-VillaContessaPhone"
+            ReferencedContainer = "container:Pods.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

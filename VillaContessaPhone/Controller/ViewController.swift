@@ -171,7 +171,7 @@ class ViewController: UIViewController, PKPushRegistryDelegate, AVAudioPlayerDel
         NSLog("toggleButtonState")
         self.btnReception.isEnabled = isEnabled
         self.btnRestaurant.isEnabled = isEnabled
-        self.btnAccept.isEnabled = isEnabled
+        //self.btnAccept.isEnabled = isEnabled
     }
     
     func callConnectedUI() {
@@ -672,7 +672,8 @@ class ViewController: UIViewController, PKPushRegistryDelegate, AVAudioPlayerDel
         FIRAnalytics.logEvent(withName: "callDidConnect", parameters: ["CallDidConnect" : "\(call.debugDescription)" as NSObject])
         self.call = call
         
-        toggleButtonState(isEnabled: true)
+        //toggleButtonState(isEnabled: true)
+        toggleButtonState(isEnabled: false)
         routeAudioToSpeaker()
         //
         //DispatchQueue.main.async(execute: {
